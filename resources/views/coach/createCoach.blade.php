@@ -3,31 +3,41 @@
 @section('title','dashboard')
 @section('content')
 
-<div class="d-flex justify-content-center align-items-center vh-100 text-light">
-<form  method="POST" action="{{ route('coach.store') }}" style="width: 26rem;"  class="mx-auto">
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-center vh-100">
+        <div class="col-md-6">
+            <div class="card bg-dark text-light">
+                <div class="card-header">
+                    <h3 class="card-title">Coach Registration</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('coach.store' , $user->id) }}" enctype="multipart/form-data">
+                        @csrf
 
-    @csrf
+                        <div class="mb-3">
+                            <label for="formFileMultiple" class="form-label">Profile Picture</label>
+                            <input class="form-control" name="image" type="file" id="formFileMultiple" accept="image/jpeg,image/png,image/jpg,image/gif" required/>
+                        </div>
 
+                        <div class="mb-3">
+                            <label for="specialization" class="form-label">Specialization</label>
+                            <input type="text" name="specialization" class="form-control" id="specialization" required>
+                        </div>
 
-    <label for="formFileMultiple" name="photo" class="form-label">Multiple files input example</label>
-    <input class="form-control mb-4" name="photo" type="file" id="formFileMultiple" multiple />
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" name="description" rows="4" id="description" required></textarea>
+                        </div>
 
-    <div data-mdb-input-init class="form-outline mb-4">
-      <input type="text" name="specialization" class="form-control" />
-      <label class="form-label" for="form4Example1">Name</label>
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ route('dashboard') }}" class="btn btn-secondary">Back</a>
+                </div>
+            </div>
+        </div>
     </div>
-  
-    <!-- Message input -->
-    <div data-mdb-input-init class="form-outline mb-4">
-      <textarea class="form-control" name="description" rows="4"></textarea>
-      <label class="form-label" for="form4Example3">Description</label>
-    </div>
-  
-   
-    <!-- Submit button -->
-    <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-4">Send</button>
-  </form>
-  </div>
+</div>
 
- 
 @endsection

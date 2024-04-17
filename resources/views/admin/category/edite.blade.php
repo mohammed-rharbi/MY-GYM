@@ -12,6 +12,7 @@
             <div class="card text-white mb-4">
                 <div class="card-body">
                     <h5 class="card-title mb-4">Manage Categories</h5>
+                    
                     <!-- Category Form -->
                     <form action="{{ route('category.update' , $category->id ) }}" method="POST">
                         @method('PUT')

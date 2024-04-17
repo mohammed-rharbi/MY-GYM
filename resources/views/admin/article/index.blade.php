@@ -8,7 +8,12 @@
         <div class="col-lg-3">
             <a href="{{ route('article.create') }}">
                 <button class="btn btn-success btn-lg btn-block">Create Article</button>
-            </a>      
+            </a>              
+        </div>
+        <div class="col-lg-3">
+            <a href="{{ route('myarticle') }}">
+                <button class="btn btn-primary btn-lg btn-block">My Articles</button>
+            </a>
         </div>
     </div>
 
@@ -18,22 +23,28 @@
                 <table class="table table-bordered table-striped">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Category</th>
-                            <th>Created At</th>
-                            <th>Actions</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Content</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Created At</th>
+                            <th scope="col" class="text-center">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-light">
                         @foreach ($articles as $article)
                         <tr>
+                            <td>
+                                <img src="{{ $article->img }}" alt="Article Image" class="img-thumbnail" style="max-width: 120px;">
+                            </td>
                             <td>{{ $article->title }}</td>
-                            <td>{{ $article->author->name }}</td>
+                            <td style="max-width: 200px;" >{!! substr($article->content, 0, 100) !!}</td>
+                            <td>{{ $article->user->name }}</td>
                             <td>{{ $article->category->name }}</td>
                             <td>{{ $article->created_at->format('M d, Y') }}</td>
                             <td class="text-center">
-                                <a href="{{ route('article.edit', $article->id) }}" class="btn btn-primary btn-sm" title="Edit Article"><i class="fas fa-edit"></i></a>
+                                {{-- <a href="{{ route('article.edit', $article->id) }}" class="btn btn-primary btn-sm" title="Edit Article"><i class="fas fa-edit"></i></a> --}}
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteArticleModal{{ $article->id }}" title="Delete Article"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>

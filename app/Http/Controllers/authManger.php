@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coach;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,10 @@ class authManger extends Controller
 
     public function home(){
 
-        return view('welcome');
+        $coach = Coach::all();
+        $user = User::where('Role','coach')->get();
+
+        return view('welcome',compact('coach','user'));
 
     }
 
@@ -83,9 +87,10 @@ class authManger extends Controller
 
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required',
-            'Role' => 'required|in:member,coach',
+            'password' => 'required|confirmed',
+            'Role' => 'required|in:member,coach',   
         ]);
+        
 
         $data['name'] = $request->name;
         $data['email'] = $request->email;
@@ -102,7 +107,7 @@ class authManger extends Controller
         // Redirect based on user role
         switch ($request->Role) {
             case 'coach':
-                return redirect(route('coach.create'))->with('success', 'Registration successful. Fill The Form');
+                return redirect(route('coachform'))->with('success', 'Registration successful. Fill The Form');
                 break;
 
             case 'member':
@@ -113,6 +118,14 @@ class authManger extends Controller
                 return redirect(route('login'))->with('success', 'Registration successful. Please check your email for verification.');
                 break;
         }
+    }
+
+
+    public function coachform(){
+
+        $user = User::findOrFail(Auth::id());
+
+        return view('coach.createCoach',compact('user'));
     }
 
     public function logout(){

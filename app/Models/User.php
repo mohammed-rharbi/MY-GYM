@@ -60,4 +60,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return $this->hasMany(Coach::class);
     }
+
+
+    public function class(){
+
+        return $this->hasMany(Gym_class::class , 'users_id');
+    }
 }

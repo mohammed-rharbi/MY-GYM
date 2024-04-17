@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('gym_classes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('class_types_id')->constrained('class_types');
-            $table->time('title')->nullable();
-            $table->time('time');
+            $table->foreignId('users_id')->constrained('users');
+            $table->foreignId('class_room_id')->constrained('classrooms');
+            $table->string('title');
             $table->date('date');
+            $table->time('startTime');
+            $table->time('endTime');
             $table->text('description');
             $table->timestamps();
         });

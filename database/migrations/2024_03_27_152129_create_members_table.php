@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('goal');
             $table->integer('wight');
             $table->double('tall');
-            $table->foreignId('user_id')->constrained('users');
-
+            $table->foreignId('users_id')->constrained('users');
             $table->timestamps();
         });
     }

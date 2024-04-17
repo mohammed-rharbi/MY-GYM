@@ -9,22 +9,15 @@
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Custom styles -->
-    <style>
-        .main-content {
-            padding-top: 80px; /* Add padding to the top */
-            min-height: calc(100vh - 80px); /* Make the main content fill the remaining viewport height */
-        }
-
-        .alert {
-            margin-top: 20px;
-        }
-    </style>
 </head>
-<body class="bg-dark">
-    
-    <div class="container-fluid main-content bg-dark">
-        <div class="row">
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+<body class="bg-dark" >
+
+    @include('component.navigation')
+
+
+    <div class="container-fluid main-content"  >
+        <div class="row" >
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" >
 
                 <div class="mt-5">
                     @if ($errors->any())
@@ -46,8 +39,6 @@
 
 
                 @yield('content')
-
-                
             </main>
         </div>
     </div>
@@ -56,5 +47,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    
+
+    @yield('scripts')
+
 </body>
 </html>

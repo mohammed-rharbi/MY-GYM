@@ -24,13 +24,23 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('classes') ? 'active' : '' }}" href="#">
+                <a class="nav-link {{ Request::is('classes') ? 'active' : 'classes' }}" href="{{ route('allclasses') }}">
                     <i class="fas fa-chalkboard-teacher mr-2"></i>Classes
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ Request::is('category') ? 'active' : '' }}" href="{{ route('category.index') }}">
                     <i class="fas fa-list-alt mr-2"></i>Categories
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('class_type') ? 'active' : '' }}" href="{{ route('class_type.index') }}">
+                    <i class="fas fa-list-alt mr-2"></i>classes type
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('Traning_Room') ? 'active' : '' }}" href="{{ route('Traning_Room.index') }}">
+                    <i class="fas fa-list-alt mr-2"></i>Traning Room
                 </a>
             </li>
         </ul>

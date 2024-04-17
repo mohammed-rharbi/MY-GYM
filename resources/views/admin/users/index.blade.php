@@ -40,7 +40,7 @@
                                         <form  method="POST" action="{{ route('Ban', $user->id) }}">
                                             @csrf
                                             @method('POST')
-                                            <button type="submit" class="btn btn-danger px-4 btn-sm" onclick="return confirm('Are you sure you want to Ban this user?')">Ban</button>
+                                            <button type="submit" id="ban" class="btn btn-danger px-4 btn-sm" onclick="return confirm('Are you sure you want to Ban this user?')">Ban</button>
                                         </form>
                                         @endif
                                     </td>
@@ -54,4 +54,7 @@
         </div>
     </div>
 </div>
+
+
+
 @endsection

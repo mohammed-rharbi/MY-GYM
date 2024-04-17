@@ -10,7 +10,7 @@ class Gym_class extends Model
 
     protected $fillable = [
 
-        'class_types_id','title','time','date','description'];
+        'class_types_id','users_id','title','startTime','endTime','date','description'];
 
     use HasFactory;
 
@@ -22,11 +22,16 @@ class Gym_class extends Model
 
     public function coach(){
 
-        return $this->belongsTo(Coach::class);
+        return $this->belongsTo(User::class , 'users_id');
     }
 
     public function class_type(){
 
-        return $this->belongsTo(class_type::class);
+        return $this->belongsTo(class_type::class , 'id');
+    }
+
+    public function classroom(){
+
+        return $this->belongsTo(classroom::class , 'id');
     }
 }

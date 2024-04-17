@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('coaches', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('users_id')->constrained('users');
             $table->text('description');
             $table->string('specialization');
             $table->timestamps();

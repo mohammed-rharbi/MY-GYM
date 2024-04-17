@@ -13,56 +13,85 @@
     <!-- Custom Styles -->
     <link href="{{ asset('style.css') }}" rel="stylesheet">
 
+
+    <style>
+
+.carousel-item img {
+    max-height: 700px; 
+}
+
+.welcome-heading {
+    font-family: 'Bungee Inline', cursive; 
+    font-size: 4rem; 
+    font-weight: bold; 
+    text-shadow: 10px 8px 90px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-text {
+    font-family: 'Bungee Inline', cursive;
+    font-size: 1.8rem; 
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); 
+}
+
+.navbar {
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; 
+}
+
+    </style>
+
 </head>
 <body>
 
 
     @include('component.navigation')
+
+
    
-    <!-- Header Section -->
-    <div class="header">
-        <h1>Welcome to My Gym</h1>
-        <p>Your journey to fitness starts here. Join our gym today and transform yourself!</p>
-        <a href="#" class="btn btn-primary">Explore Our Services</a>
+<!-- Carousel -->
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{{ asset('images/bot.jpg') }}" class="d-block w-100" alt="Slide 1">
+            <div class="carousel-caption d-none d-md-block">
+                <h2 class="welcome-heading">Welcome to My Gym</h2>
+                <p class="welcome-text">Your journey to fitness starts here. Join our gym today and transform yourself!</p>
+                <a href="#" class="btn btn-primary">Explore Our Services</a>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <img src="{{ asset('images/Dim.jpg') }}" class="d-block w-100" alt="Slide 2">
+            <div class="carousel-caption d-none d-md-block">
+                <h2 class="welcome-heading">Welcome to My Gym</h2>
+                <p class="welcome-text">Your journey to fitness starts here. Join our gym today and transform yourself!</p>
+                <a href="#" class="btn btn-primary">Explore Our Services</a>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <img src="{{ asset('images/jum.jpg') }}" class="d-block w-100" alt="Slide 3">
+            <div class="carousel-caption d-none d-md-block">
+                <h2 class="welcome-heading">Welcome to My Gym</h2>
+                <p class="welcome-text">Your journey to fitness starts here. Join our gym today and transform yourself!</p>
+                <a href="#" class="btn btn-primary">Explore Our Services</a>
+            </div>
+        </div>
     </div>
 
-   
+    <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
 
-    {{-- <div id="carouselExampleFade" class="carousel slide carousel-fade">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="card bg-primary text-white mb-4">
-                <div class="card-body">Manage Users</div>
-                <div class="card-footer d-flex align-items-center justify-content-between bg-transparent border-top-0">
-                    <div>
-                        <a class="btn btn-sm btn-light mr-2" href="#" data-toggle="tooltip" data-placement="top" title="Edit User"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-sm btn-light" href="#" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="fas fa-trash-alt"></i></a>
-                    </div>
-                    <a class="small text-white stretched-link" href="#" data-toggle="tooltip" data-placement="top" title="Manage all users">View Details <i class="fas fa-arrow-right ml-1"></i></a>
-                </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="card bg-primary text-white mb-4">
-                <div class="card-body">Manage Users</div>
-                <div class="card-footer d-flex align-items-center justify-content-between bg-transparent border-top-0">
-                    <div>
-                        <a class="btn btn-sm btn-light mr-2" href="#" data-toggle="tooltip" data-placement="top" title="Edit User"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-sm btn-light" href="#" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="fas fa-trash-alt"></i></a>
-                    </div>
-                    <a class="small text-white stretched-link" href="#" data-toggle="tooltip" data-placement="top" title="Manage all users">View Details <i class="fas fa-arrow-right ml-1"></i></a>
-                </div>
-            </div>          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div> --}}
 
     <div class="container">
         <!-- Services Section -->
@@ -115,7 +144,7 @@
 
 
         <!-- Articles Section -->
-<div class="section">
+<div class="section" id="art">
     <h2>Latest Articles</h2>
     <div class="row">
         <div class="col-md-4">
@@ -152,7 +181,6 @@
 </div>
 
 
-
         <!-- Coaches Section -->
 <div class="section">
     <h2>Our Coaches</h2>
@@ -161,7 +189,7 @@
             <div class="">
                 <img src="{{ asset('images\pexels-andrea-piacquadio-3836883.jpg') }}" class="card-img-top" alt="Coach 1">
                 <div class="card-body">
-                    <h5 class="card-title">John Doe</h5>
+                    <h5 class="card-title"></h5>
                     <p class="card-text">Certified Personal Trainer</p>
                     <p class="card-text">Specializes in strength training and weight loss.</p>
                     <ul class="list-unstyled">
@@ -171,34 +199,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="">
-                <img src="{{ asset('images\pexels-andrea-piacquadio-3836883.jpg') }}" class="card-img-top" alt="Coach 1">
-                <div class="card-body">
-                    <h5 class="card-title">Jane Smith</h5>
-                    <p class="card-text">Certified Yoga Instructor</p>
-                    <p class="card-text">Specializes in Vinyasa flow and mindfulness meditation.</p>
-                    <ul class="list-unstyled">
-                        <li><i class="fas fa-check-circle text-success mr-2"></i>RYT-200 Certified</li>
-                        <li><i class="fas fa-check-circle text-success mr-2"></i>Yoga Alliance Member</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="">
-                <img src="{{ asset('images\pexels-andrea-piacquadio-3836883.jpg') }}" class="card-img-top" alt="Coach 1">
-                <div class="card-body">
-                    <h5 class="card-title">Alex Johnson</h5>
-                    <p class="card-text">Certified Nutritionist</p>
-                    <p class="card-text">Specializes in sports nutrition and meal planning.</p>
-                    <ul class="list-unstyled">
-                        <li><i class="fas fa-check-circle text-success mr-2"></i>ISSA Certified</li>
-                        <li><i class="fas fa-check-circle text-success mr-2"></i>Bachelor's Degree in Nutrition</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </div>
 

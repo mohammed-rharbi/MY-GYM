@@ -6,6 +6,7 @@ use App\Models\article;
 use App\Models\categorie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class ArticleController extends Controller
 {
@@ -18,7 +19,14 @@ class ArticleController extends Controller
         $articles = article::all();
         $categories = categorie::all();
 
-        return view('admin.article.index', compact('articles' , 'categories'));
+
+        
+        if(Auth::user()->Role == 'admin'){
+            return view('admin.article.index', compact('articles' , 'categories'));
+        }else{
+            return view('coach.article.index', compact('articles' , 'categories'));
+        }
+        
 
     }
 
@@ -29,7 +37,13 @@ class ArticleController extends Controller
     {
 
         $categories = categorie::all();
-        return view('admin.article.create' , compact('categories'));
+
+
+        if(Auth::user()->Role == 'admin'){
+            return view('admin.article.create' , compact('categories'));
+        }else{
+            return view('coach.article.create' , compact('categories'));
+        }
     }
 
     /**
@@ -38,11 +52,10 @@ class ArticleController extends Controller
     
      public function store(Request $request)
     {
-        // Validate the incoming request
         $validatedData = $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|file|max:2048',
             'category_id' => 'required|exists:categories,id',
         ]);
 
@@ -54,21 +67,26 @@ class ArticleController extends Controller
             $image->move(public_path('images'), $imageName); 
         }
 
-        $article = new Article();
+        $article = new article();
         $article->title = $validatedData['title'];
         $article->content = $validatedData['content'];
-        $article->image = 'images/' . $imageName;
+        $article->img = 'images/' . $imageName;
         $article->categories_id = $validatedData['category_id'];
-        $article->user_id = $userId;
+        $article->users_id = $userId;
 
         $article->save();
 
-        return redirect()->route('articles.index')->with('success', 'Article created successfully.');
+
+        if(Auth::user()->Role == 'admin'){
+            return redirect()->route('article.index')->with('success', 'Article created successfully.');
+        }else{
+            return redirect()->route('article.index')->with('success', 'Article created successfully.');
+        }
     }
     /**
      * Display the specified resource.
      */
-    public function show(article $article)
+    public function show()
     {
         //
     }
@@ -76,24 +94,78 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(article $article)
+    public function edit(string $id)
     {
-        //
+
+        $article = article::where('id',$id)->where('users_id',auth::id())->firstOrFail();
+        $categories = categorie::all();
+
+
+        if(Auth::user()->Role == 'admin'){
+            return view('admin.article.edit' , compact('categories','article'));
+        }else{
+            return view('coach.article.edit' , compact('categories','article'));
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, article $article)
+    public function update(Request $request, $id)
     {
-        //
-    }
+        $article = Article::findOrFail($id);
+    
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'image' => 'nullable|image|max:2048',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+    
+        if ($request->hasFile('image')) {
+            if (File::exists(public_path($article->img))) {
+                File::delete(public_path($article->img));
+            }
 
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('images'), $imageName);
+            $article->img = 'images/' . $imageName;
+        }
+    
+
+        $article->title = $validatedData['title'];
+        $article->content = $validatedData['content'];
+        $article->categories_id = $validatedData['category_id'];
+    
+        $article->save();
+    
+        if(Auth::user()->Role == 'admin'){
+            return redirect()->route('article.index')->with('success', 'Article updated successfully.');
+        }else{
+            return redirect()->route('article.index')->with('success', 'Article updated successfully.');
+        }
+    }
+    
+    
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(article $article)
+    public function destroy($id)
     {
-        //
-    }
+        $article = Article::findOrFail($id);    
+
+        if (File::exists(public_path($article->img))) {
+            File::delete(public_path($article->img));
+        }
+
+        $article->delete();
+
+        if(Auth::user()->Role == 'admin'){
+            return redirect()->route('article.index')->with('success', 'Article updated successfully.');
+        }else{
+            return redirect()->route('article.index')->with('success', 'Article updated successfully.');
+        }  
+      }
+
 }

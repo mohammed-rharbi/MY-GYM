@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('class_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name')->unique()->onDelete('cascade');
             $table->text('description')->nullable();
             $table->timestamps();
         });

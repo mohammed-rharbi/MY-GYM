@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\class_type;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -23,6 +24,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
 
             UsersTableSeeder::class,
+            CategorySeeder::class,
+            class_type_seeder::class,
+            classroomsedder::class,
         ]);
     }
 }

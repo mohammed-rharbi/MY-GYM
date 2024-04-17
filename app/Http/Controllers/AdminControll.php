@@ -9,6 +9,7 @@ use App\Models\Gym_class;
 use Illuminate\View\View;
 use App\Models\member_class;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminControll extends Controller
 {
@@ -34,6 +35,13 @@ class AdminControll extends Controller
 
 
         return view('admin.users.index',compact('users'));
+    }
+
+    public function allclasses(){
+
+        $classes = Gym_class::all();
+
+        return view('admin.classes.index', compact('classes'));
     }
     /**
      * Show the form for creating a new resource.
@@ -84,6 +92,16 @@ class AdminControll extends Controller
     }
 
 
+    public function myarticle(){
+
+
+        $userId = auth()->id();
+        $articles = Article::where('users_id', $userId)->get();
+
+        return view('admin.article.show' , compact('articles'));
+    }
+
+
     public function banned(): View
     {
         
@@ -109,5 +127,12 @@ class AdminControll extends Controller
         
         return redirect()->back()->with('success', 'User Unbanned successfully!');
         
+    }
+
+    public function adminprofile(){
+
+        $user = Auth::user();
+
+        return view('admin.profile' , compact('user'));
     }
 }

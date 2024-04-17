@@ -21,7 +21,7 @@
                   <a class="nav-link" href="{{ route('home') }}" style="font-size: 18px; color: white;">Home</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="#" style="font-size: 18px; color: white;">Articles</a>
+                  <a class="nav-link" href="" style="font-size: 18px; color: white;">Articles</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="#" style="font-size: 18px; color: white;">About Us</a>
@@ -33,12 +33,14 @@
               <li class="nav-item">
                   <a class="nav-link" href="{{ route('logout') }}" style="font-size: 18px; color: white;">Logout</a>
               </li>
+              @if (Auth::user()->Role == 'coach')
               <li class="nav-item">
-                  <a class="nav-link" href="#" style="font-size: 18px; color: white;">Profile</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="#" style="font-size: 18px; color: white;">Dashboard</a>
-              </li>
+                <a class="nav-link"  href="{{ route('coach.index') }}" style="font-size: 18px; color: white;">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('profile.showprofile') }}"  style="font-size: 18px; color: white;">Profile</a>
+            </li>
+              @endif
               @else
               <li class="nav-item">
                   <a class="nav-link" href="{{ route('register') }}" style="font-size: 18px; color: white;">Register</a>
@@ -48,15 +50,12 @@
               </li>
               @endif
 
-              {{-- @if (Auth::user()->Role == 'admin')
-              <li class="nav-item">
-                <a class="nav-link"  style="font-size: 18px; color: white;">Admin</a>
-            </li>
-              @endif --}}
+              
+            
           </ul>
           <!-- Right elements -->
+          @if (Auth::user())
           <ul class="navbar-nav ms-auto">
-            @if (Auth::user())
               <!-- Avatar -->
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuAvatar" role="button" data-bs-toggle="dropdown"
@@ -70,8 +69,8 @@
                   <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
               </ul>
               </li>
-              @endif
           </ul>
+          @endif
       </div>
       <!-- Collapsible wrapper -->
   </div>

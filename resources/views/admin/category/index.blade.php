@@ -15,8 +15,8 @@
     </div>
 
     @foreach($categories as $category)
-    <div class="text-dark mt-2" style="font-size: 1.1rem;">
-        <div class="list-group-item d-flex justify-content-between align-items-center">
+    <div class="text-dark  mt-2" style="font-size: 1.1rem;">
+        <div class="list-group-item   d-flex justify-content-between align-items-center">
             <h3 class="">{{ $category->name }}</h3>
             <div class="btn-group " role="group">
                 <a href="{{ route('category.edit', $category->id) }}" class="btn px-3 mr-3 btn-outline-primary btn">Edit</a>

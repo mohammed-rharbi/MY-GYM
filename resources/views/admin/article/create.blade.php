@@ -9,14 +9,14 @@
             <div class="card">
                 <div class="card-header text-white" style="background-color: rgb(86, 19, 149)">Create Article</div>
                 <div class="card-body">
-                    <form action="{{ route('article.store') }}" method="POST" novalidate>                  
+                    <form action="{{ route('article.store') }}" method="POST" novalidate enctype="multipart/form-data">                  
                         @method('POST')
                         @csrf
 
                         <div class="form-group">
                             <label for="image">Image:</label>
                             <div class="custom-file">
-                                <input type="file" name="image" id="image" class="custom-file-input" accept="image/*">
+                                <input type="file" name="image" id="image" class="custom-file-input" accept="image/jpeg,image/png,image/jpg,image/gif" required>
                                 <label class="custom-file-label" for="image">Choose file</label>
                             </div>
                         </div>

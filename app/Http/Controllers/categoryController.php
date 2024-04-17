@@ -31,7 +31,11 @@ class categoryController extends Controller
     public function store(Request $request)
     {
        $validateData = $request->validate([
-        'name' => 'required|alpha|unique:categories,name|max:255',
+        'name' => [
+            'required',
+            'regex:/^[a-zA-Z\s]+$/',
+            'unique:categories,name',
+        ],
        ]);
 
        $existingCategory = categorie::where('name' , $validateData['name'])->first();
