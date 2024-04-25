@@ -25,13 +25,19 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('article') ? 'active' : '' }}" href="{{ route('article.index') }}" >
+                <a class="nav-link {{ Request::is('article') ? 'active' : '' }}" href="{{ route('My_Article') }}" >
                     <i class="fas fa-newspaper mr-2"></i>Articles
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('classes') ? 'active' : 'classes' }}" href="{{ route('class.index') }}">
+                <a class="nav-link {{ Request::is('class') ? 'active' : 'classes' }}" href="{{ route('class.index') }}">
                     <i class="fas fa-chalkboard-teacher mr-2"></i>Classes
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('traniers') ? 'active' : 'classes' }}" href="{{ route('mytraniers') }}">
+                    <i class="fas fa-chalkboard-teacher mr-2"></i>My Trainers
                 </a>
             </li>
         </ul>

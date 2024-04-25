@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="container-fluid">
-    <h1 class="h2 mb-5 mt-4 text-light text-center">Admin Dashboard</h1>
 
     <div class="row">
         <div class="col-lg-4 mb-4">

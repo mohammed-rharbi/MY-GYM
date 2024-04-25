@@ -28,7 +28,6 @@ class CategorySeeder extends Seeder
         'Bodyweight Exercises',
         'Yoga and Pilates',
         'Sports Performance',
-        'HIIT (High-Intensity Interval Training)',
         'Recovery and Regeneration',
         'Exercise Science',
         'Fitness Motivation',

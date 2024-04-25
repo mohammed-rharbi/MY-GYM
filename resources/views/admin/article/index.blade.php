@@ -36,7 +36,7 @@
                         @foreach ($articles as $article)
                         <tr>
                             <td>
-                                <img src="{{ $article->img }}" alt="Article Image" class="img-thumbnail" style="max-width: 120px;">
+                                <img src="/storage/{{ $article->img }}" alt="Article Image" class="img-thumbnail" style="max-width: 120px;">
                             </td>
                             <td>{{ $article->title }}</td>
                             <td style="max-width: 200px;" >{!! substr($article->content, 0, 100) !!}</td>

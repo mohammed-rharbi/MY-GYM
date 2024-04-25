@@ -22,7 +22,7 @@
             @foreach($articles as $key => $article)
             <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                 <div class="card mx-auto mt-5" style="width: 45rem;"> <!-- Added mx-auto class to center the card -->
-                    <img src="{{ asset($article->img) }}" class="card-img-top" alt="Article Image">
+                    <img src="/storage/{{$article->img}}" class="card-img-top" alt="Article Image">
                     <div class="card-body">
                         <h5 class="card-title" style="font-size: 20px; font-weight: bold;">{{ $article->title }}</h5>
                         <p class="card-text" style="font-size: 14px;">{!! $article->content !!}</p>

@@ -49,9 +49,8 @@
 <div class="container rounded bg-white   mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center">
-
-                <img class="rounded-circle mt-5" width="150px" src="{{ $user->image }}">
+            <div class="d-flex flex-column align-items-center text-center mb-5">
+                <img class="rounded-circle mt-5" width="150px" height="150px" src="/storage/{{$coach->image}}">
                 <span class="font-weight-bold">{{ $user->name }}</span><span class="text-black-50">{{ $user->email }}</span>
 
             </div>
@@ -62,14 +61,13 @@
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
 
-                <form action="{{ route('coachprofile', $user->id) }}" method="POST"  novalidate enctype="multipart/form-data">
+                <form action="{{ route('storeInfo') }}" method="POST"  novalidate enctype="multipart/form-data">
 
                     @method('PUT')
                     @csrf
 
                 <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value="{{ $user->name }}"></div>
-                    <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="" placeholder="surname"></div>
+                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" name="name"  value="{{ $user->name }}"></div>
                 </div>
                 <div class="row mt-3">
                     

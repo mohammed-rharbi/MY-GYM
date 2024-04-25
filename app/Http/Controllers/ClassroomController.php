@@ -41,13 +41,12 @@ class ClassroomController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('images'), $imageName); 
+            $image = $request->file('image')->store('images','public');
         }
 
+
         $room = new classroom;
-        $room->image = 'images/' . $imageName;
+        $room->image = $image ;
         $room->name = $validedata['name'];
         $room->description = $validedata['description'];
         $room->save();
@@ -93,10 +92,11 @@ class ClassroomController extends Controller
                 File::delete(public_path($room->image));
             }
 
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('images'), $imageName);
-            $room->image = 'images/' . $imageName;
+            if ($request->hasFile('image')) {
+                $image = $request->file('image')->store('images','public');
+            }
+    
+            $room->image = $image;
         }
 
 

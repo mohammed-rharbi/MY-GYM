@@ -45,6 +45,12 @@
                             <textarea name="description" id="description"  class="form-control" rows="5" required>{{ $class->description }}</textarea>
                         </div>
 
+
+                        <div class="form-group">
+                            <label for="Capacity">Capacity:</label>
+                            <input type="number" name="Capacity" value="{{ $class->Capacity }}" id="Capacity" min="3" max="25" class="form-control" rows="5" required></input>
+                        </div>
+
                         <div class="form-group">
                             <label for="start_time">Start Time:</label>
                             <input type="time" name="startTime" id="start_time" value="{{ $class->startTime }}" class="form-control" required>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Coach;
+use App\Models\member;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,7 @@ class authManger extends Controller
         $coach = Coach::all();
         $user = User::where('Role','coach')->get();
 
-        return view('welcome',compact('coach','user'));
+        return view('home',compact('coach','user'));
 
     }
 
@@ -47,7 +48,6 @@ class authManger extends Controller
         ]);
 
         
-
         $cordentials = $request->only('email','password');
         if(Auth::attempt($cordentials)){
 
@@ -84,49 +84,65 @@ class authManger extends Controller
     public function GetRegester(Request $request){
 
         $request->validate([
-
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed',
-            'Role' => 'required|in:member,coach',   
+            'Role' => 'required|in:member,coach',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
         ]);
+    
+
         
-
-        $data['name'] = $request->name;
-        $data['email'] = $request->email;
-        $data['password'] = Hash::make($request->password);
-        $data['Role'] = $request->Role;
-        $user = User::create($data);
-
-        if(!$user){
-            return redirect(route('regester'))->with('error' , 'registration failed try again');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image')->store('images', 'public'); 
+        } else {
+            $image = null;
         }
 
-        // $user->sendEmailVerificationNotification();
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'Role' => $request->Role,
+        ]);
 
-        // Redirect based on user role
+        if(!$user){
+            return redirect(route('regester'))->with('error' , 'Registration failed. Please try again.');
+        }
+    
+        Auth::login($user);
+    
         switch ($request->Role) {
             case 'coach':
-                return redirect(route('coachform'))->with('success', 'Registration successful. Fill The Form');
+                Coach::create([
+                    'users_id' => $user->id,
+                    'description' => $request->description,
+                    'specialization' => $request->specialization,
+                    'image' => $image,
+                ]);
+                return redirect(route('coach.index'))->with('success', 'Registration successfull.');
                 break;
-
+    
             case 'member':
-                return view('member.form');
+                Member::create([
+                    'users_id' => $user->id,
+                    'goal' => $request->goal,
+                    'wight' => $request->wight,
+                    'tall' => $request->tall,
+                    'image' => $image, 
+                ]);
+                return redirect(route('member.index'))->with('success', 'Registration successfull.');
                 break;
-
+    
             default:
                 return redirect(route('login'))->with('success', 'Registration successful. Please check your email for verification.');
                 break;
         }
     }
-
-
-    public function coachform(){
-
-        $user = User::findOrFail(Auth::id());
-
-        return view('coach.createCoach',compact('user'));
-    }
+    
+    
+    
+    
 
     public function logout(){
 

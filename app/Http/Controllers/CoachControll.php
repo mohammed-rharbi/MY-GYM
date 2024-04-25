@@ -6,6 +6,9 @@ use App\Models\User;
 use App\Models\Coach;
 use App\Models\article;
 use App\Models\categorie;
+use App\Models\classroom;
+use App\Models\Gym_class;
+use App\Models\member_class;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,11 +19,15 @@ class CoachControll extends Controller
      */
     public function index()
     {
+
         $articles = article::where('users_id' , Auth::id())->get();
         $categories = categorie::all();
+        $classCount = Gym_class::where('users_id',Auth::id())->count();
+        $user = Auth::user();
 
-        return view('coach.dashbourd', compact('articles','categories'));
+        return view('coach.dashbourd', compact('articles','categories','classCount','user'));
     }
+
 
     public function createArticle(){
 
@@ -32,88 +39,59 @@ class CoachControll extends Controller
     public function myArticle()
     {
         
-        $articles = article::where('users_id' , Auth::id())->get();
+        $coach = Auth::user()->id;
+        $articles = article::where('users_id' , $coach)->get();
         $categories = categorie::all();
 
         return view('coach.article.index', compact('articles' , 'categories'));
 
     }
 
-    public function store( Request $request)
-    {
-       
-        $validatedata = $request->validate([
+    public function Profile(Request $request)
+{
+    $validatedData = $request->validate([
+        'description' => 'required|string',
+        'specialization' => 'required|string',
+        'name' => 'required',
+    ]);
 
-            'image' => 'required|max:2948',
-            'description' => 'required|string',
-            'specialization' => 'required|string',
-        ]);
+    $user = $request->user();
 
-        $id = Auth::id();
-
-        $user = User::findOrFail($id); 
-        $coach = new Coach;
-
-        if(!$user){
-
-            return redirect()->back()->with('error' , 'user not found');
-        }
-
-        $coach->description = $validatedata['description'];
-        $coach->specialization = $validatedata['specialization'];
-        $coach->users_id = Auth::id();
-        $coach->save();
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('images'), $imageName); 
-        }
-
-        $user->image = 'images/' . $imageName;
-        $user->save();
-
-        return redirect()->route('coach.index')->with('success','welcome coach');
-
+    if (!$user) {
+        return redirect()->back()->with('error', 'User not authenticated');
     }
-    
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function coachprofile(Request $request , string $id)
-    {
+    $coach = Coach::where('users_id', $user->id)->first();
 
-        
-        // Validate the incoming request data
-        $validatedData = $request->validate([
-            'name' => 'nullable',
-            'image' => 'nullable',
-            'description' => 'nullable|string',
-            'specialization' => 'nullable|string',
-        ]);
-    
-        $user = User::findOrFail($id);
-        $coach = Coach::findOrFail($id);
+    if (!$coach) {
+        return redirect()->back()->with('error', 'Coach profile not found');
+    }
 
-        $coach->users_id = Auth::id();
+    if ($request->hasFile('image')) {
+        $image = $request->file('image')->store('imges','public');
+     
+        $coach->image = $image;
+    }
+
+    if ($request->filled('description')) {
         $coach->description = $validatedData['description'];
-        $coach->specialization = $validatedData['specialization'];
-        $coach->save();
-    
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('images'), $imageName); 
-            $user->image = 'images/' . $imageName;
-            $user->save();
-        }
-    
-
-        return redirect()->back()->with('success' , 'Coach profile updated successfully');
     }
-    
 
+    if ($request->filled('specialization')) {
+        $coach->specialization = $validatedData['specialization'];
+    }
+
+    if ($request->filled('name')) {
+        $coach->user->name = $validatedData['name'];
+    }
+
+    $coach->save();
+
+
+    return redirect()->back()->with('success', 'Coach profile updated successfully');
+}
+
+    
     public function showprofile(){
 
         $userId = Auth::id();
@@ -126,11 +104,35 @@ class CoachControll extends Controller
 
     /**
      * Display the specified resource.
+     * 
      */
-    public function show(User $user)
+
+    public function show(string $id)
     {
-        //
+        
+        $user = User::findOrFail($id);
+
+
+        return view('profiles.coachProfile', compact('user'));
+
     }
+
+
+
+    public function ClassTraniers()
+    {
+
+
+        $coachclass = Gym_class::where('users_id' , Auth::id())->get();
+        
+        $tranier = member_class::where('class_id' , $coachclass);
+        
+
+        return view('coach.Trainees.index', compact('tranier'));
+
+
+    }
+
 
     /**
      * Show the form for editing the specified resource.

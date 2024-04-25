@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="container-fluid">
-    <h1 class="mt-4 text-light">Admin Dashboard</h1>
     <div class="row">
         <!-- Manage Users Card -->
         <div class="col-lg-12">
@@ -16,6 +15,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Photo</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Role</th>
@@ -26,6 +26,7 @@
                                 @foreach($users as $user)
                                 <tr>
                                     <td>{{ $user->id }}</td>
+                                    <td>{{ $user->image }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->Role }}</td>

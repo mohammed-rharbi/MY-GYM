@@ -16,7 +16,7 @@ class classroom extends Model
 
     public function class(){
 
-        $this->hasMany(Gym_class::class);
+        $this->hasMany(Gym_class::class,'class_room_id');
     }
 
 }

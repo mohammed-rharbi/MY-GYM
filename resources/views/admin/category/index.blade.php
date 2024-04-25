@@ -3,9 +3,7 @@
 @section('title', 'Manage Categories')
 
 @section('content')
-<div class="container-fluid">
-    <h1 class="mt-4 text-light">Admin Dashboard</h1>
-   
+<div class="container-fluid">   
     <div class="row mb-4">
         <div class="col-lg-3">
             <a href="{{ route('category.create') }}">

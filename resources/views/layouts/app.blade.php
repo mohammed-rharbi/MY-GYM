@@ -8,16 +8,17 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link href="{{ asset('home.css') }}" rel="stylesheet">
     <!-- Custom styles -->
 </head>
-<body class="bg-dark" >
+<body >
 
     @include('component.navigation')
 
 
     <div class="container-fluid main-content"  >
         <div class="row" >
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" >
 
                 <div class="mt-5">
                     @if ($errors->any())
@@ -39,10 +40,11 @@
 
 
                 @yield('content')
-            </main>
-        </div>
-    </div>
 
+
+        </div>
+        
+    </div>
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

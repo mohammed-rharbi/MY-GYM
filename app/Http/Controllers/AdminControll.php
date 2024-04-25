@@ -105,7 +105,7 @@ class AdminControll extends Controller
     public function banned(): View
     {
         
-        return view('component.banned'); // Return the banned message view
+        return view('component.banned'); 
     }
 
 

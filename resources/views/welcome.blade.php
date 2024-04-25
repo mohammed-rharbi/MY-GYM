@@ -40,7 +40,6 @@
     width: 100%;
     z-index: 1000; 
 }
-
     </style>
 
 </head>
@@ -55,7 +54,7 @@
 <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="{{ asset('images/bot.jpg') }}" class="d-block w-100" alt="Slide 1">
+            <img src="/storage/{{'images/back1.jpg' }}" class="d-block w-100" alt="Slide 1">
             <div class="carousel-caption d-none d-md-block">
                 <h2 class="welcome-heading">Welcome to My Gym</h2>
                 <p class="welcome-text">Your journey to fitness starts here. Join our gym today and transform yourself!</p>
@@ -64,7 +63,7 @@
         </div>
 
         <div class="carousel-item">
-            <img src="{{ asset('images/Dim.jpg') }}" class="d-block w-100" alt="Slide 2">
+            <img src="/storage/{{'images/back3.jpg' }}" class="d-block w-100" alt="Slide 3">
             <div class="carousel-caption d-none d-md-block">
                 <h2 class="welcome-heading">Welcome to My Gym</h2>
                 <p class="welcome-text">Your journey to fitness starts here. Join our gym today and transform yourself!</p>
@@ -73,7 +72,7 @@
         </div>
 
         <div class="carousel-item">
-            <img src="{{ asset('images/jum.jpg') }}" class="d-block w-100" alt="Slide 3">
+            <img src="/storage/{{'images/back2.jpg' }}" class="d-block w-100" alt="Slide 3">
             <div class="carousel-caption d-none d-md-block">
                 <h2 class="welcome-heading">Welcome to My Gym</h2>
                 <p class="welcome-text">Your journey to fitness starts here. Join our gym today and transform yourself!</p>

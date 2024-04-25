@@ -25,6 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'Role',
+      
     ];
 
     /**
@@ -36,6 +37,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token',
     ];
+ 
 
     /**
      * Get the attributes that should be cast.
@@ -51,14 +53,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
 
-    public function member(){
+    public function member(){   
 
-        return $this->hasMany(member::class);
+        return $this->hasMany(member::class , 'users_id');
     }
 
     public function coach(){
 
-        return $this->hasMany(Coach::class);
+        return $this->hasMany(Coach::class , 'users_id');
     }
 
 

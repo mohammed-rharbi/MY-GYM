@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('users_id')->constrained('users');
             $table->text('description');
             $table->string('specialization');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

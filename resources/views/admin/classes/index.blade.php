@@ -14,6 +14,7 @@
                             <th scope="col">ID</th>
                             <th scope="col">Title</th>
                             <th scope="col">Description</th>
+                            <th scope="col">Capacity</th>
                             <th scope="col">Date</th>
                             <th scope="col">Type</th>
                             <th scope="col">Room</th>
@@ -30,6 +31,7 @@
                             <td>{{ $class->id }}</td>
                             <td>{{ $class->title }}</td>
                             <td>{{ $class->description }}</td>
+                            <td>{{ $class->Capacity }}</td>
                             <td>{{ $class->date }}</td>
                             <td>{{ $class->class_type->name}}</td>
                             <td>{{ $class->classroom->name}}</td>
@@ -38,7 +40,12 @@
                             <td>{{ $class->endTime}}</td>
                             <td>{{ $class->created_at->format('M d, Y') }}</td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteArticleModal{{ $class->id }}" title="Cancel Class"><i class="fas fa-cancel"></i></button>
+                                <form action="{{ route('class_destroy', $class->id) }}" method="POST">
+                                    
+                                @csrf
+                                    <button type="submit" class="btn btn-danger btn-sm"  title="Cancel Class"><i class="fas fa-cancel" onclick="return confirm('are u sure you want to delete this class')"></i></button>
+
+                                </form>
                             </td>
                         </tr>
                         <!-- Delete Article Modal -->

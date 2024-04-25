@@ -14,11 +14,11 @@ class member_class extends Model
 
     public function class(){
 
-        return $this->hasMany(Gym_class::class);
+        return $this->belongsTo(Gym_class::class , 'id');
     }
 
     public function member(){
 
-        return $this->hasMany(member::class);
+        return $this->belongsTo(member::class , 'id');
     }
 }

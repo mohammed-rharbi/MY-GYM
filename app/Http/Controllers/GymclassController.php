@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\class_type;
+use Carbon\Carbon;
 use App\Models\classroom;
 use App\Models\Gym_class;
+use App\Models\class_type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,8 +16,11 @@ class GymclassController extends Controller
      */
     public function index()
     {
+    
+
         $classes = Gym_class::where('users_id', Auth::id())->get();
-        return view('coach.classes.index', compact('classes'));
+        $class_room = classroom::all();
+        return view('coach.classes.index', compact('classes','class_room'));
     }
 
     /**
@@ -36,15 +40,26 @@ class GymclassController extends Controller
     {
         $validatedata = $request->validate([
             'title' => 'required',
-            'date' => 'required',
-            'startTime' => 'required',
-            'endTime' => 'required',
+            'date' => 'required|after:yesterday',
+            'startTime' => 'required|date_format:H:i',
+            'endTime' => 'required|date_format:H:i|after:startTime',
             'description' => 'required',
             'class_types_id' => 'required',
             'class_room_id' => 'required',
+            'Capacity' => 'required|integer|min:4|max:25',
 
         ]);
 
+
+    
+        $existingClass = Gym_class::where('class_room_id', $validatedata['class_room_id'])
+            ->where('date', $validatedata['date'])
+            ->where('endTime', '<=', now()->format('H:i:s'))
+            ->exists();
+    
+        if ($existingClass) {
+            return redirect()->back()->with('error', 'Another class is already scheduled in the same class room at the same time.');
+        }
 
         $class = new Gym_class();
 
@@ -53,6 +68,7 @@ class GymclassController extends Controller
         $class->startTime = $validatedata['startTime'];
         $class->endTime = $validatedata['endTime'];
         $class->description = $validatedata['description'];
+        $class->Capacity = $validatedata['Capacity'];
         $class->users_id = Auth::id();
         $class->class_types_id = $validatedata['class_types_id'];
         $class->class_room_id = $validatedata['class_room_id'];
@@ -61,9 +77,7 @@ class GymclassController extends Controller
         $class->save();
 
 
-        return redirect()->route('coach.index')->with('success' ,'class has ben created successfully');
-
-
+        return redirect()->route('class.index')->with('success' ,'class has ben created successfully');
     }
 
     /**
@@ -94,15 +108,28 @@ class GymclassController extends Controller
         $class = Gym_class::findOrFail($id);
         $validatedata = $request->validate([
             'title' => 'required',
-            'date' => 'required',
-            'startTime' => 'required',
-            'endTime' => 'required',
+            'date' => 'required|after:yesterday',
+            'startTime' => 'required|date_format:H:i',
+            'endTime' => 'required|date_format:H:i|after:startTime',
             'description' => 'required',
             'class_types_id' => 'required',
             'class_room_id' => 'required',
+            'Capacity' => 'required|integer|min:4|max:25',
             
             
         ]);
+
+
+        
+        $existingClass = Gym_class::where('class_room_id', $validatedata['class_room_id'])
+            ->where('date', $validatedata['date'])
+            ->where('endTime', '<=', now()->format('H:i:s'))
+            ->exists();
+    
+        if ($existingClass) {
+            return redirect()->back()->with('error', 'Another class is already scheduled in the same class room at the same time.');
+        }
+
 
 
         $class->title = $validatedata['title'];
@@ -110,6 +137,7 @@ class GymclassController extends Controller
         $class->startTime = $validatedata['startTime'];
         $class->endTime = $validatedata['endTime'];
         $class->description = $validatedata['description'];
+        $class->Capacity = $validatedata['Capacity'];
         $class->class_types_id = $validatedata['class_types_id'];
         $class->class_room_id = $validatedata['class_room_id'];
 

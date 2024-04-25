@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->string('goal');
-            $table->integer('wight');
-            $table->double('tall');
+            $table->string('wight');
+            $table->string('tall');
+            $table->string('image');
             $table->foreignId('users_id')->constrained('users');
             $table->timestamps();
         });

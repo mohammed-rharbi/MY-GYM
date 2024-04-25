@@ -5,7 +5,7 @@
   <div class="container-fluid">
       <!-- Navbar brand -->
       <a class="navbar-brand" href="{{ route('home') }}">
-          <img src="{{ asset('images/logo.png') }}" height="55" alt="MDB Logo" loading="lazy" />
+          <img src="/storage/{{'images/logo.png' }}" height="55" alt="MDB Logo" loading="lazy" />
       </a>
       <!-- Toggle button -->
       <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent"
@@ -13,9 +13,9 @@
           <i class="fas fa-bars"></i>
       </button>
 
-      <!-- Collapsible wrapper -->
       <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-          <!-- Left links -->
+
+        @if (auth()->user() && auth()->user()->Role == 'coach')
           <ul class="navbar-nav">
               <li class="nav-item">
                   <a class="nav-link" href="{{ route('home') }}" style="font-size: 18px; color: white;">Home</a>
@@ -29,31 +29,74 @@
               <li class="nav-item">
                   <a class="nav-link" href="#" style="font-size: 18px; color: white;">Contact</a>
               </li>
-              @if (Auth::user())
               <li class="nav-item">
                   <a class="nav-link" href="{{ route('logout') }}" style="font-size: 18px; color: white;">Logout</a>
               </li>
-              @if (Auth::user()->Role == 'coach')
               <li class="nav-item">
                 <a class="nav-link"  href="{{ route('coach.index') }}" style="font-size: 18px; color: white;">Dashboard</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('profile.showprofile') }}"  style="font-size: 18px; color: white;">Profile</a>
             </li>
-              @endif
-              @else
-              <li class="nav-item">
-                  <a class="nav-link" href="{{ route('register') }}" style="font-size: 18px; color: white;">Register</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="{{ route('login') }}" style="font-size: 18px; color: white;">Login</a>
-              </li>
-              @endif
-
-              
             
+        </ul>
+
+
+        @endif
+
+
+        @if ( auth()->user() && auth()->user()->Role == 'member' )
+
+        <ul class="navbar-nav">       
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('member.index') }}" style="font-size: 18px; color: rgb(21, 1, 1);">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('articles') }}" style="font-size: 18px; color:  rgb(21, 1, 1);">Articles</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('aboutus') }}" style="font-size: 18px; color:  rgb(21, 1, 1);">About Us</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('contact') }}" style="font-size: 18px; color:  rgb(21, 1, 1);">Contact</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('Gym_Classes') }}" style="font-size: 18px; color:  rgb(21, 1, 1);">Classes</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('classRooms') }}" style="font-size: 18px; color:  rgb(21, 1, 1);">Rooms</a>
+        </li>
+        
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('logout') }}" style="font-size: 18px; color:  rgb(21, 1, 1);">Logout</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"   style="font-size: 18px; color:  rgb(21, 1, 1);">Dashboard</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{{ route('My_profil') }}"  style="font-size: 18px; color:  rgb(21, 1, 1);">Profile</a>
+      </li>
+    </ul>
+
+        
+        @endif
+         
+@if (!Auth::user())
+
+<ul class="navbar-nav">
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('register') }}" style="font-size: 18px; color:  rgb(0, 0, 0);">Register</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('login') }}" style="font-size: 18px; color:  rgb(0, 0, 0);">Login</a>
+</li>
+</ul>
+
+@endif
+  
+
           </ul>
-          <!-- Right elements -->
           @if (Auth::user())
           <ul class="navbar-nav ms-auto">
               <!-- Avatar -->

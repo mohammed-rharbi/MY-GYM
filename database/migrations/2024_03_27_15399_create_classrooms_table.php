@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('classrooms', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique()->onDelete('cascade');
+            $table->string('name')->onDelete('cascade');
             $table->string('image');
             $table->text('description');
             $table->timestamps();

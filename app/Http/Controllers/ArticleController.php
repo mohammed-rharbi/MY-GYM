@@ -61,16 +61,16 @@ class ArticleController extends Controller
 
         $userId = Auth::id();
 
+
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('images'), $imageName); 
+            $image = $request->file('image')->store('images','public');
         }
 
+        
         $article = new article();
         $article->title = $validatedData['title'];
         $article->content = $validatedData['content'];
-        $article->img = 'images/' . $imageName;
+        $article->img = $image;
         $article->categories_id = $validatedData['category_id'];
         $article->users_id = $userId;
 
@@ -80,15 +80,18 @@ class ArticleController extends Controller
         if(Auth::user()->Role == 'admin'){
             return redirect()->route('article.index')->with('success', 'Article created successfully.');
         }else{
-            return redirect()->route('article.index')->with('success', 'Article created successfully.');
+            return redirect()->route('My_Article')->with('success', 'Article created successfully.');
         }
     }
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(string $id)
     {
-        //
+        
+        $article = article::findOrFail($id);
+
+        return view('member.show_article', compact('article'));
     }
 
     /**
@@ -127,12 +130,12 @@ class ArticleController extends Controller
                 File::delete(public_path($article->img));
             }
 
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('images'), $imageName);
-            $article->img = 'images/' . $imageName;
+            $image = $request->file('image')->store('images','public');
+
+            $article->img = $image;
         }
     
+        
 
         $article->title = $validatedData['title'];
         $article->content = $validatedData['content'];

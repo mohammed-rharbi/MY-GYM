@@ -45,6 +45,11 @@
                             <textarea name="description" id="description" class="form-control" rows="5" required></textarea>
                         </div>
 
+                        <div class="form-group">
+                            <label for="Capacity">Capacity:</label>
+                            <input type="number" name="Capacity" id="Capacity" min="3" max="25" class="form-control" rows="5" required></input>
+                        </div>
+
                         <div class="form-group row">
                             <div class="col-sm-6">
                                 <label for="start_time">Start Time:</label>

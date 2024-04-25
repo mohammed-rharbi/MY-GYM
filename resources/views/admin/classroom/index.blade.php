@@ -17,7 +17,7 @@
     @foreach($TraningRoom as $room)
     <div class="card mb-3">
         <div class="card-body d-flex align-items-center">
-            <img src="{{ $room->image }}" height="100" alt="" class="mr-3 rounded">
+            <img src="/storage/{{ $room->image }}" height="100" alt="" class="mr-3 rounded">
             <div>
                 <h3 class="card-title mb-1" style="font-style:oblique">{{ $room->name }}</h3>
                 <p class="card-content mt-3" style="font-style:oblique">{{ $room->description }}</p>

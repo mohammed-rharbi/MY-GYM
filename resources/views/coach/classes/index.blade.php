@@ -11,6 +11,8 @@
             </a>              
         </div>
     </div>
+    
+{{-- @dd($classes) --}}
 
     <div class="row">
         <div class="col-lg-12">
@@ -21,6 +23,7 @@
                             <th scope="col">ID</th>
                             <th scope="col">Title</th>
                             <th scope="col">Description</th>
+                            <th scope="col">Capacity</th>
                             <th scope="col">Date</th>
                             <th scope="col">Type</th>
                             <th scope="col">Room</th>
@@ -34,10 +37,11 @@
                     <tbody>
                         @foreach ($classes as $class)
                         <tr class="text-white">
-                            <td>{{ $class->id }}</td>
-                            <td>{{ $class->title }}</td>
-                            <td>{{ $class->description }}</td>
-                            <td>{{ $class->date }}</td>
+                            <td>{{ $class->id}}</td>
+                            <td>{{ $class->title}}</td>
+                            <td>{{ $class->description}}</td>
+                            <td>{{ $class->Capacity}}</td>
+                            <td>{{ $class->date}}</td>
                             <td>{{ $class->class_type->name}}</td>
                             <td>{{ $class->classroom->name}}</td>
                             <td>{{ $class->coach->name}}</td>

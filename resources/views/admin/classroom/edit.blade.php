@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="container-fluid">
-    <h1 class="mt-4 text-light">Admin Dashboard</h1>
     <div class="row">
         <!-- Manage Categories Card -->
         <div class="col-xl-6">
@@ -23,6 +22,11 @@
                         <div class="form-group">
                             <label for="category_name">Room Name:</label>
                             <input type="text" class="form-control" id="category_name" name="name" value="{{ $room->name }}" placeholder="Enter room name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="class_description">Description</label>
+                            <textarea class="form-control" id="class_description" name="description" rows="5" placeholder="Enter class description">{{ $room->description }}</textarea>
                         </div>
 
                         <div class="text-right">
