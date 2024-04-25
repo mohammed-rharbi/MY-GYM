@@ -93,7 +93,7 @@
                                     <a class="product-thumb" href="#"><img src="/storage/{{ $class->class->classroom->image}}" alt="room image"></a>
                                     <div class="product-info">
                                         <h4 class="product-title"><a href="#">{{ $class->class->title }}</a></h4>
-                                        <h5 class="product-title"><a href="#"></a></h5>
+                                        <h5 class="prod:uct-title"><a href="#"></a></h5>
                                         <div class="text-lg text-medium text-muted"></div>
                                         <div>Booked At:
                                             <div class="d-inline text-success">{{ $class->created_at->format('Y,M,D') }}</div>
