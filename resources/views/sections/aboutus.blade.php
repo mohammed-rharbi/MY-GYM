@@ -8,11 +8,7 @@
 
 	
 
-	<div class="container py-4">
-
-		
-
-		
+<div class="container py-4" >
   <!-- About Us Section -->
   <section class="about py-5 mt-5 text-center" style="background-color: #ffffff;">
     <div class="container">
@@ -20,7 +16,7 @@
             <div class="col-lg-6">
                 <h2 class="display-4 mb-4">Who We Are</h2>
                 <p class="lead fs-5">At MY GYM, we're your dedicated fitness partners. With a focus on community, quality, and support, we're here to help you achieve your fitness goals. Our team of experienced trainers and top-notch facilities are ready to guide you on your journey to a healthier, happier you</p>
-                <button type="button" class="btn btn-primary btn-lg rounded-pill">Get in Touch</button>
+                <a  href="{{ route('contact') }}" ><button type="button" class="btn btn-primary btn-lg rounded-pill">Get in Touch</button></a>
             </div>
             <div class="col-lg-6">
                 <div class="row gx-3 gy-3">

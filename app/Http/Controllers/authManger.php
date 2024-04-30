@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\article;
 use App\Models\Coach;
 use App\Models\member;
 use App\Models\User;

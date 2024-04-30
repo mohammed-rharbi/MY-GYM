@@ -25,6 +25,6 @@ class member extends Model
 
     public function myclass(){
 
-        return $this->hasMany(member_class::class , 'users_id' );
+        return $this->hasMany(member_class::class , 'member_id' );
     }
 }

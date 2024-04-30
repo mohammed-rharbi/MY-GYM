@@ -41,6 +41,7 @@
             </div>
             @endforeach
         </div>
+        
         <a class="carousel-control-prev" href="#articleCarousel" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>

@@ -18,8 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('article', ArticleController::class);
 Route::get('/banned_user' , [AdminControll::class , 'banned'])->name('banned');
-Route::get('/login',[authManger::class , 'login'])->name('login');
-Route::get('/register' , [authManger::class , 'regester' ])->name('register');
+
+Route::get('/login',[authManger::class , 'login'])->name('login')->middleware('guest');
+Route::get('/register' , [authManger::class , 'regester' ])->name('register')->middleware('guest');
+
 Route::post('/login' , [authManger::class , 'GetLogin' ])->name('login.GetLogin');
 Route::post('/regester' , [authManger::class , 'GetRegester' ])->name('regester.GetRegester');
 Route::get('/logout', [authManger::class , 'logout'])->name('logout');
@@ -54,7 +56,6 @@ Route::middleware(['Auth','Role:coach'])->group(function () {
     Route::get('profile' , [CoachControll::class , 'showprofile'])->name('profile.showprofile');
     Route::resource('class', GymclassController::class);
     Route::put('/Coach_Profile/{id}' , [CoachControll::class , 'coachprofile'])->name('coachprofile');
-
     Route::put('storeInfo', [CoachControll::class, 'Profile'])->name('storeInfo');
     Route::resource('coach' , CoachControll::class);
     Route::get('traniers' , [CoachControll::class , 'ClassTraniers'])->name('mytraniers');
@@ -71,8 +72,12 @@ Route::middleware(['Auth','Role:member'])->group(function () {
     Route::resource('member' , MemberControll::class);
     Route::post('BooK_Class/{id}' , [MemberControll::class , 'book'])->name('book_class');
     Route::get('My_profil' , [MemberControll::class , 'profil'])->name('My_profil');
+    
+    Route::post('cancel_class/{id}', [MemberControll::class , 'cancel_class'])->name('cancel_class');
 
 });
+
+
 
 
 Route::get('Gym_Classes' , [MemberControll::class , 'classes'])->name('Gym_Classes');
@@ -85,8 +90,9 @@ Route::get('Class_details{id}' , [MemberControll::class , 'Class_details'])->nam
 Route::get('Author_Profile{id}' , [MemberControll::class , 'Author_Profile'])->name('Author_Profile');
 
 
-Route::get('/search' , [MemberControll::class , 'search'])->name('search');
 
+Route::get('/search' , [MemberControll::class , 'search'])->name('search');
+Route::get('show_class_type{id}' , [MemberControll::class , 'show_class_type'])->name('show_class_type');
 
 
 
@@ -101,13 +107,8 @@ Route::get('/contact', function(){
     return view('sections.contact');
 })->name('contact');
 
-// Route::get('/dashbourd', function () {
-//     return view('dashbourd');
-// })->name('dash');
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 
 
 

@@ -9,20 +9,38 @@
         <h1 id="dynamicText">Challenge Your Limits</h1>
         <p>Welcome to our fitness hub, where your journey <br> to a healthier you begins</p>
     </div>
-    <a href="{{ route('register') }}" class="signup-btn">
-        <span class="sign">
-            <img src="/storage/images/dump.png" width="20px" height="10" alt="" class="cosmo">
-            <span class="front">Sign Up</span>
-            <span class="back"></span>
-            <span class="do">Let's Do It</span>
-        </span>
-    </a>
+
 </div>
 
+
 <div class="container mt-5">
+<!-- Article Section -->
+<section class="articles py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Latest Articles</h2>
+        <div class="text-center mb-5">
+            <a href="{{ route('articles') }}" class="btn btn-primary">Discover More</a>
+        </div>
+        <div class="row justify-content-center">
+            @foreach($articles as $article)
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow mb-4 h-100">
+                        <img src="/storage/{{ $article->img }}" class="card-img-top" alt="{{ $article->title }}">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title mb-3">{{ $article->title }}</h5>
+                            <a href="{{ route('article.show', $article->id) }}" class="btn btn-primary btn-sm mt-3 align-self-end">See More</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+
     <!-- Feature Section -->
 <div class="section">
-    <h2 class="text-center mb-5">Our Services</h2>
+    <h2 class="text-center mb-5 mt-5">Our Services</h2>
     <div class="row">
         <div class="col-md-4">
             <div class="feature text-center">
@@ -180,3 +198,24 @@ setInterval(updateText, 3000);
 
 
 </script>
+
+
+<style>
+
+
+.articles .card {
+    transition: transform 0.3s ease;
+}
+
+.articles .card:hover {
+    transform: translateY(-5px);
+}
+
+.articles .card-img-top {
+    border-top-left-radius: calc(0.25rem - 1px);
+    border-top-right-radius: calc(0.25rem - 1px);
+    object-fit: cover;
+    height: 200px; /* Adjust the height as needed */
+}
+
+</style>

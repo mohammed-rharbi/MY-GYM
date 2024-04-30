@@ -55,7 +55,7 @@ class ArticleController extends Controller
         $validatedData = $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'image' => 'required|file|max:2048',
+            'image' => 'required|file|max:9048',
             'category_id' => 'required|exists:categories,id',
         ]);
 
@@ -121,7 +121,7 @@ class ArticleController extends Controller
         $validatedData = $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:9048',
             'category_id' => 'required|exists:categories,id',
         ]);
     
@@ -146,7 +146,7 @@ class ArticleController extends Controller
         if(Auth::user()->Role == 'admin'){
             return redirect()->route('article.index')->with('success', 'Article updated successfully.');
         }else{
-            return redirect()->route('article.index')->with('success', 'Article updated successfully.');
+            return redirect()->route('My_Article')->with('success', 'Article created successfully.');
         }
     }
     
@@ -167,7 +167,7 @@ class ArticleController extends Controller
         if(Auth::user()->Role == 'admin'){
             return redirect()->route('article.index')->with('success', 'Article updated successfully.');
         }else{
-            return redirect()->route('article.index')->with('success', 'Article updated successfully.');
+            return redirect()->route('My_Article')->with('success', 'Article created successfully.');
         }  
       }
 

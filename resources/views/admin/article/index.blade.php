@@ -32,7 +32,7 @@
                             <th scope="col" class="text-center">Actions</th>
                         </tr>
                     </thead>
-                    <tbody class="text-light">
+                    <tbody>
                         @foreach ($articles as $article)
                         <tr>
                             <td>

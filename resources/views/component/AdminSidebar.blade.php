@@ -57,8 +57,8 @@
             z-index: 100;
             padding: 48px 0 0;
             box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-            background-color: #4b0082; /* Dark purple background color */
-            border-right: 1px solid #dee2e6; /* Add a border on the right */
+            background-color: #8745458e; 
+            border-right: 1px solid #dee2e6;
         }
 
     .sidebar-sticky {
@@ -67,32 +67,32 @@
 
     .sidebar .nav-link {
         font-weight: 500;
-        color: #fff; /* White text color */
-        padding: 10px 20px; /* Add padding to the links */
+        color: #fff; 
+        padding: 10px 20px;
         transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .sidebar .nav-link.active {
-        color: #ffc107; /* Yellow active link color */
-        background-color: #6a5acd; /* Background color for the active link */
-        border-right: 3px solid #ffc107; /* Highlight active link with border on the right */
+        color: #ffc107; 
+        background-color: #4f4760; 
+        border-right: 3px solid #ffc107; 
     }
 
     .sidebar .nav-link:hover {
-        background-color: #483d8b; /* Darker purple background color on hover */
-        color: #ffd700; /* Yellow text color on hover */
+        background-color: #483d8b; 
+        color: #ffd700; 
     }
 
     .sidebar .nav-link i {
-        min-width: 30px; /* Ensure icons have consistent width */
+        min-width: 30px;
     }
 
     .sidebar .nav-link:hover i {
-        color: #ffd700; /* Yellow icon color on hover */
+        color: #ffd700; 
     }
 
     .sidebar .nav-item {
-        margin-bottom: 5px; /* Add margin between navigation items */
+        margin-bottom: 5px; 
     }
 
     .sidebar-heading {

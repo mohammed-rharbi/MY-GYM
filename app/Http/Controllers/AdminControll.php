@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Coach;
 use App\Models\article;
 use App\Models\Gym_class;
+use App\Models\member;
 use Illuminate\View\View;
 use App\Models\member_class;
 use Illuminate\Http\Request;
@@ -21,10 +22,14 @@ class AdminControll extends Controller
         
         $totalusers = User::where('Role','member')->count();
         $totlacoaches = User::where('Role' , 'coach')->count();
+
+        $users = member::all();
+        $coaches = Coach::all();
+
         $totalclasses = Gym_class::count();
         $totalarticales = article::count();
         $totalresrvations = member_class::count();
-        return view('admin.dashbourd' , compact('totalusers','totlacoaches','totalclasses','totalarticales','totalresrvations'));
+        return view('admin.dashbourd' , compact('totalusers','totlacoaches','totalclasses','totalarticales','totalresrvations','users','coaches'));
     }
 
 

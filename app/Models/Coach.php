@@ -15,6 +15,7 @@ class Coach extends Model
     'description',
 
     'specialization',
+
     'image',
 ];
     
@@ -28,11 +29,13 @@ class Coach extends Model
 
     public function class(){
 
-        return $this->hasMany(Gym_class::class);
+        return $this->hasMany(Gym_class::class , 'users_id');
     }
 
     public function article(){
 
         return $this->hasMany(article::class);
     }
+
+    
 }

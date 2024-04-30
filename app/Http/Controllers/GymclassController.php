@@ -18,6 +18,7 @@ class GymclassController extends Controller
     {
     
 
+
         $classes = Gym_class::where('users_id', Auth::id())->get();
         $class_room = classroom::all();
         return view('coach.classes.index', compact('classes','class_room'));
@@ -41,21 +42,21 @@ class GymclassController extends Controller
         $validatedata = $request->validate([
             'title' => 'required',
             'date' => 'required|after:yesterday',
-            'startTime' => 'required|date_format:H:i',
-            'endTime' => 'required|date_format:H:i|after:startTime',
+            'startTime' => 'required|',
+            'endTime' => 'required|after:startTime',
             'description' => 'required',
             'class_types_id' => 'required',
             'class_room_id' => 'required',
             'Capacity' => 'required|integer|min:4|max:25',
-
         ]);
 
 
-    
         $existingClass = Gym_class::where('class_room_id', $validatedata['class_room_id'])
-            ->where('date', $validatedata['date'])
-            ->where('endTime', '<=', now()->format('H:i:s'))
+            ->orWhere('date', $validatedata['date'])
+            ->orWhere('endTime', '<=', now()->format('H:i:s'))
             ->exists();
+
+            // dd($existingClass);
     
         if ($existingClass) {
             return redirect()->back()->with('error', 'Another class is already scheduled in the same class room at the same time.');
@@ -109,8 +110,8 @@ class GymclassController extends Controller
         $validatedata = $request->validate([
             'title' => 'required',
             'date' => 'required|after:yesterday',
-            'startTime' => 'required|date_format:H:i',
-            'endTime' => 'required|date_format:H:i|after:startTime',
+            'startTime' => 'required',
+            'endTime' => 'required|after:startTime',
             'description' => 'required',
             'class_types_id' => 'required',
             'class_room_id' => 'required',
@@ -119,7 +120,7 @@ class GymclassController extends Controller
             
         ]);
 
-
+           
         
         $existingClass = Gym_class::where('class_room_id', $validatedata['class_room_id'])
             ->where('date', $validatedata['date'])

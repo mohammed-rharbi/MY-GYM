@@ -57,14 +57,14 @@
 
 		
 
-		@if ($articles->isEmpty())
+		@if ($results->isEmpty())
 		
 		<h4 class="text-dark text-center">No articles found</h4>
 
 		@endif
 
 	
-        @foreach ($articles as $article)
+        @foreach ($results as $article)
     
 		<article class="postcard light yellow">
 			<a class="postcard__img_link" href="{{ route('article.show', $article->id) }}">
@@ -78,7 +78,7 @@
 					</time>
 				</div>
 				<div class="postcard__bar"></div>
-				<div class="postcard__preview-txt">{!! substr($article->content, 0,200) !!}</div>
+				<div class="postcard__preview-txt">{!! substr($article->content, 0, 250) !!}</div>
 				<ul class="postcard__tagbox">
 
                     <a href="{{ route('Author_Profile' , $article->user->id ) }}">
@@ -98,17 +98,16 @@
                 
 			</div>
 		</article>
+
+
         @endforeach
 
-		<div class="text-center mt-5">
-			{{ $articles->links() }}
-		</div>
+
+        <div class="text-center mt-5">
+            {{ $results->links() }}
+        </div>
 	</div>
-
-
-
 @endsection
-
 
 
 

@@ -20,12 +20,20 @@ class CoachControll extends Controller
     public function index()
     {
 
-        $articles = article::where('users_id' , Auth::id())->get();
-        $categories = categorie::all();
-        $classCount = Gym_class::where('users_id',Auth::id())->count();
-        $user = Auth::user();
 
-        return view('coach.dashbourd', compact('articles','categories','classCount','user'));
+        $articlesTotal = article::where('users_id' , Auth::id())->count();
+
+        $coachClass = Gym_class::where('users_id', Auth::id())->first();
+
+        if ($coachClass) {
+            $totalReservations = Member_class::where('class_id', $coachClass->id)->count();
+        } else {
+            $totalReservations = 0;
+        }
+
+        $classCount = Gym_class::where('users_id',Auth::id())->count();
+
+        return view('coach.dashbourd', compact('articlesTotal','classCount','totalReservations'));
     }
 
 
@@ -123,15 +131,27 @@ class CoachControll extends Controller
     {
 
 
-        $coachclass = Gym_class::where('users_id' , Auth::id())->get();
+   
+    // Get the coach's class
+    $coachClass = Gym_class::where('users_id', Auth::id())->first();
+
+    if ($coachClass) {
+        // Get all member_class instances with the same class as the coach
+        $bookedMemberships = Member_class::where('class_id', $coachClass->id)->get();
         
-        $tranier = member_class::where('class_id' , $coachclass);
+        // Extract user IDs from the member_class instances
+        $userIds = $bookedMemberships->pluck('user_id')->toArray();
         
-
-        return view('coach.Trainees.index', compact('tranier'));
-
-
+        // Get all users who have booked the coach's class
+        $bookedUsers = User::whereIn('id', $userIds)->get();
+    } else {
+        // Handle the case where the coach does not have a class
+        $bookedUsers = collect();
     }
+    
+        return view('coach.Trainees.index', compact('bookedUsers'));
+    }
+    
 
 
     /**

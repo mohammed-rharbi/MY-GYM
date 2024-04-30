@@ -5,16 +5,18 @@
 @section('content')
 
 <div class="background-image">
-    <div class="d-flex justify-content-center align-items-end" style="height: 100%;">
-        <a href="{{ route('register') }}">
-            <span class="sign">
-                <img src="/storage/images/dump.png" width="20px" height="10" alt="" class="cosmo">
-                <span class="front">Sign Up</span>
-                <span class="back"></span>
-                <span class="do">Let's Do It</span>
-            </span>
-        </a>
+    <div class="header">
+        <h1 id="dynamicText">Challenge Your Limits</h1>
+        <p>Welcome to our fitness hub, where your journey <br> to a healthier you begins</p>
     </div>
+    <a href="{{ route('register') }}" class="signup-btn">
+        <span class="sign">
+            <img src="/storage/images/dump.png" width="20px" height="10" alt="" class="cosmo">
+            <span class="front">Sign Up</span>
+            <span class="back"></span>
+            <span class="do">Let's Do It</span>
+        </span>
+    </a>
 </div>
 
 <div class="container mt-5">
@@ -161,3 +163,20 @@
 
 
 
+<script>
+
+var texts = [
+    "Train Harder Now",
+    "Reach New Heights",
+    "Never Give Up"
+];var index = 0;
+
+function updateText() {
+    document.getElementById("dynamicText").textContent = texts[index]; 
+    index = (index + 1) % texts.length; 
+}
+
+setInterval(updateText, 3000); 
+
+
+</script>

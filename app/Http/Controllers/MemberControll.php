@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Coach;
+use App\Models\member;
 use App\Models\article;
 use App\Models\categorie;
+use App\Models\class_type;
 use App\Models\classroom;
-use App\Models\Coach;
 use App\Models\Gym_class;
-use App\Models\member;
 use App\Models\member_class;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactMail;
 
 class MemberControll extends Controller
 {
@@ -21,7 +25,7 @@ class MemberControll extends Controller
     public function index()
     {
         
-        $articles = article::all();
+        $articles = article::latest()->take(3)->get();
         $classes = Gym_class::all();
         $rooms = classroom::all();
 
@@ -33,16 +37,22 @@ class MemberControll extends Controller
     public function classes(){
 
         $classes = Gym_class::where('hide', false)->get();
+        $classTypes = class_type::all();
     
-        $existingClasses = Gym_class::where('endTime', '>', now()->format('H:i:s'))->get();
+// $localDate = Carbon::now()->format('Y-m-d');
+
+//             $existingClasses = Gym_class::
+//             orWhere('date', $localDate)
+//             ->orWhere('endTime', '<=', now()->format('H:i:s'))
+//             ->get();
     
-        if ($existingClasses->count() > 0) {
-            foreach ($existingClasses as $class) {
-                $class->delete(); // Delete each ongoing gym class
-            }
-        }
-    
-        return view('member.classes', compact('classes'));
+//         if ($existingClasses->count() > 0) {
+//             foreach ($existingClasses as $class) {
+//                 $class->delete(); // Delete each ongoing gym class
+//             }
+//         }
+
+        return view('member.classes', compact('classes','classTypes'));
     }
     
 
@@ -58,7 +68,7 @@ class MemberControll extends Controller
     
     public function articles(){
 
-        $articles = article::latest()->get();
+        $articles = article::latest()->simplePaginate(8);
         $categories = categorie::all();
 
     
@@ -132,88 +142,68 @@ class MemberControll extends Controller
     public function search(Request $request)
     {
         $query = $request->get('query');
+        $categories = categorie::all();
 
-        // Perform your search logic here
         $results = Article::where('title', 'like', '%' . $query . '%')
             ->orWhere('content', 'like', '%' . $query . '%')
-            ->get();
+            ->simplePaginate(6);
 
-        // Prepare data for JSON response
-        $searchResults = [];
-        foreach ($results as $article) {
-            $searchResults[] = [
-                'url' => route('article.show', $article->id),
-                'img' => '/storage/' . $article->img,
-                'title' => $article->title,
-                'created_at' => $article->created_at,
-                'created_at_formatted' => $article->created_at->format('M d, Y'),
-                'content' => substr($article->content, 0, 350),
-                'author' => $article->user->name,
-                'category' => $article->category->name
-            ];
-        }
 
-        return response()->json($searchResults);
+        return view('member.search_result', compact('results','categories'));
     }
     
 
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+
+    public function show_class_type(string $id){
+
+        $classes = Gym_class::where('class_types_id' , $id)->get();
+
+        return view('member.show_class_type', compact('classes'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(User $user)
-    {
-        //
-    }
 
 
     public function profil(){
 
         $user = Auth::user();
         $member = $user->member;
-        $gymclass = member_class::where('member_id' , $user->id)->get();
+        $gymclass = member_class::where('member_id' , Auth::id())->get();
         
         return view('profiles.user_profile', compact('user', 'member','gymclass'));
 
+    }
+
+
+    // public function send_contact(request $request){
+
+    //     $request->validate([
+
+    //         'fullname' => 'required',
+    //         'email' => 'required|email',
+    //         'phone' => 'nullable',
+    //         'subject' => 'required',
+    //         'message' => 'required',
+    //     ]);
+
+    //     $data = [
+    //         'fullname' => $request->fullname,
+    //         'email' => $request->email,
+    //         'phone' => $request->phone,
+    //         'subject' => $request->subject,
+    //         'message' => $request->message,
+    //     ];
+
+    //     Mail::to('rharbi383@gmail.com')->send(new ContactMail($data));
+    // }
+
+
+    public function cancel_class(string $id){
+
+
+        $class = member_class::findOrFail($id);
+        $class->delete();
+
+        return redirect()->back()->with('success' , 'class was canceld successfully');
     }
 }

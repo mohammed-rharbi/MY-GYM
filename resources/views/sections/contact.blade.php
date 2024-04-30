@@ -64,12 +64,14 @@
                   <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
                 </div>
                 <div class="col-12">
-                  <div class="d-grid">
+                  <div class="d-grid mt-4">
                     <button class="btn btn-primary btn-lg" type="submit">Send Message</button>
                   </div>
                 </div>
               </div>
             </form>
+
+
   
           </div>
         </div>

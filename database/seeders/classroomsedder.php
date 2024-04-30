@@ -18,7 +18,7 @@ class classroomsedder extends Seeder
        classroom::create([
 
         'name' => 'FitZone',
-        'image' => 'images/1713280294_20190405_Ride50_JB_018.JPG',
+        'image' => 'images/jQMUuaj9Oy1MCUqkPX3S35B61djMuS3imxFCzs3o.jpg',
         'description' => 'High-energy space for dynamic workouts and fitness goals',
 
        ]);
@@ -26,7 +26,7 @@ class classroomsedder extends Seeder
        classroom::create([
 
         'name' => 'Agoura',
-        'image' => 'images/1713280326_Eldoa-Class-Room-at-B52-Fit-Montreal-Gym-scaled.jpg',
+        'image' => 'images/QRvLSzCWqhhzF9fKfwdUqlHqNqJJ7Okdh5HdIqTK.jpg',
         'description' => 'Serene environment for yoga, Pilates, and meditation',
 
 
@@ -36,7 +36,7 @@ class classroomsedder extends Seeder
        classroom::create([
 
         'name' => 'Zumba Zone',
-        'image' => 'images/1713280654_images.jpeg',
+        'image' => 'images/AuOmjq0jH5Zn58ooW5VEQauqE5jprdZpQKb5F10b.jpg',
         'description' => 'Energetic setting for dance-filled Zumba sessions',
 
 
@@ -47,7 +47,7 @@ class classroomsedder extends Seeder
        classroom::create([
 
         'name' => ' HIIT Haven',
-        'image' => 'images/1713280723_DFH_Fitness_003-1344x896.jpg',
+        'image' => 'images/Vs7MxwcymawcuVuzD69XbjjcLsp5HB9wYxYD3oG5.jpg',
         'description' => 'Intense area specializing in high-intensity interval training',
 
 
@@ -57,7 +57,7 @@ class classroomsedder extends Seeder
        classroom::create([
 
         'name' => 'Box Arena',
-        'image' => 'images/1713280837_UFC-Gym-Northridge_Heavy-Bag-Area.jpg',
+        'image' => 'images/IUK2SfGISYiMXgxYTQIFs7vdJGAaITRWtwncCZPR.jpg',
         'description' => 'Dedicated space for boxing and kickboxing workouts',
 
         
@@ -68,7 +68,7 @@ class classroomsedder extends Seeder
        classroom::create([
 
         'name' => 'ZenFlex',
-        'image' => 'images/1713280880_future-school-gym.jpg',
+        'image' => 'images/bkrDV39FUUxEKH4Ijn4Ez5wYDso6pN3U00ijcWEF.jpg',
         'description' => 'Peaceful room offering yoga and meditation classes',
 
 

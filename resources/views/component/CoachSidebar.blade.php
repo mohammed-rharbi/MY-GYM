@@ -54,8 +54,8 @@
             z-index: 100;
             padding: 48px 0 0;
             box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-            background-color: #4b0082; /* Dark purple background color */
-            border-right: 1px solid #dee2e6; /* Add a border on the right */
+            background-color: #8745458e; 
+            border-right: 1px solid #dee2e6;
         }
 
     .sidebar-sticky {

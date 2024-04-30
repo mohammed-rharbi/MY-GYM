@@ -20,7 +20,7 @@
         }
     </style>
 </head>
-<body class="bg-dark">
+<body>
     
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -39,13 +39,20 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contact</a>
                         </li>
+                        @auth
+                        <li class="nav-item">
+                            <a href="{{ route('logout') }}">
+                                <button type="submit" class="btn btn-danger">Sign Out</button>
+                            </a>
+                        </li>
+                        @endauth
                     </ul>
                 </div>
     </nav>
     @include('component.CoachSidebar')
 
 
-    <div class="container-fluid main-content bg-dark">
+    <div class="container-fluid main-content">
         <div class="row">
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
@@ -59,12 +66,22 @@
                     @endif
             
                     @if (session()->has('error'))
-                        <div class="alert alert-danger">{{ session('error') }}</div>  
-                    @endif
-            
-                    @if (session()->has('success'))
-                        <div class="alert alert-success">{{ session('success') }}</div>  
-                    @endif
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+        
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+              @endif
                 </div>
 
 
@@ -83,6 +100,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
     
 

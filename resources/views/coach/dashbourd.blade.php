@@ -7,36 +7,58 @@
 
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            <h2 class="mb-4">Welcome to Your Dashboard</h2>
-        </div>
-    </div>
+
+
 
     <div class="row">
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Your Classes</h4>
-                </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card bg-primary text-white shadow h-100 py-2">
                 <div class="card-body">
-                    <p>You have {{ $classCount }} classes scheduled.</p>
-                    <a href="" class="btn btn-primary">View Classes</a>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <i class="far fa-calendar-alt fa-3x"></i>
+                        </div>
+                        <div class="col ml-2">
+                            <div class="text-xs font-weight-bold text-uppercase mb-1">Reservations</div>
+                            <div class="h5 mb-0 font-weight-bold">{{ $totalReservations }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 mb-4">
+            <div class="card bg-success text-white shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <i class="fas fa-book fa-3x"></i>
+                        </div>
+                        <div class="col ml-2">
+                            <div class="text-xs font-weight-bold text-uppercase mb-1">Total  Articles</div>
+                            <div class="h5 mb-0 font-weight-bold">{{ $articlesTotal }}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Manage Your Profile</h4>
-                </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card bg-danger text-white shadow h-100 py-2">
                 <div class="card-body">
-                    <p>Update your profile information, add a profile picture, and manage your account settings.</p>
-                    <a href="" class="btn btn-primary">Edit Profile</a>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <i class="fas fa-dumbbell fa-3x"></i>
+                        </div>
+                        <div class="col ml-2">
+                            <div class="text-xs font-weight-bold text-uppercase mb-1">Number of Classes</div>
+                            <div class="h5 mb-0 font-weight-bold">{{ $classCount }}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </div>   
 </div>
+</div>
+
 @endsection

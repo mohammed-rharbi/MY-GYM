@@ -46,7 +46,7 @@
 <body>
 
 
-    @include('component.navigation')
+@include('component.navigation')
 
 
    

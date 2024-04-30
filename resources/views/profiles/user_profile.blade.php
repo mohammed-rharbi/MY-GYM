@@ -3,120 +3,156 @@
 @section('title', 'Profile')
 
 @section('content')
-{{-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Profile</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4 text-center">
-                            @if($member->isNotEmpty())
-                                @foreach($member as $m)
-                                    <img src="/storage/{{ $m->image }}" alt="Profile Picture" class="img-fluid rounded-circle mb-4" style="max-width: 200px;">
-                                @endforeach
-                            @else
-                                <p>No member record found.</p>
-                            @endif
-                        </div>
-                        <div class="col-md-8">
-                            @if($member->isNotEmpty())
-                                @foreach($member as $m)
-                                    <p><strong>Name:</strong> {{ $m->user->name }}</p>
-                                    <p><strong>Email:</strong> {{ $m->user->email }}</p>
-                                    <p><strong>Goal:</strong> {{ $m->goal }}</p>
-                                    <p><strong>Weight:</strong> {{ $m->wight }} kg</p>
-                                    <p><strong>Height:</strong> {{ $m->tall }} cm</p>
-                                @endforeach
-                            @else
-                                <p>No member record found.</p>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
 
 
-
-<div class="container padding-bottom-3x mb-2">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container mt-5 mb-5">
     <div class="row">
-        <div class="col-lg-4">
-            <aside class="user-info-wrapper">
-                <div class="user-cover" style="background-image: url(https://bootdey.com/img/Content/bg1.jpg);">
-                </div>
         @if ($member->isNotEmpty())
-        @foreach ($member as $m)                       
-                <div class="user-info">
-                    <div class="user-avatar">
-                    <a class="edit-avatar" href="#"></a><img src="/storage/{{ $m->image }}" alt="User"></div>
-
-                    <div class="user-data">
-                        <h4>{{ $m->user->name }}</h4><span>Joined {{ $m->created_at->format('Y,M,D') }}</span>
+        @foreach ($member as $m)    
+        <div class="col-lg-3 col-md-4">
+            <div class="text-center card-box">
+                <div class="member-card">
+                    <div class="thumb-xl member-thumb m-b-10 center-block">
+                        <img src="/storage/{{ $m->image }}" class="img-circle img-thumbnail" alt="profile-image">
                     </div>
+
+                    <div class="">
+                        <h4 class="m-b-5">{{ $m->user->name }}</h4>
+                        <p class="text-muted">{{ $m->user->email }}</p>
+                    </div>
+                                    
+                    <div class="text-left m-t-40">
+                        <p class="text-muted font-13"><strong>Name :</strong> <span class="m-l-15">{{ $m->user->name}}</span></p>
+                        <p class="text-muted font-13"><strong>Email :</strong> <span class="m-l-15">{{ $m->user->email}}</span></p>
+                        <p class="text-muted font-13"><strong>height :</strong> <span class="m-l-15">{{ $m->tall}} cm</span></p>
+                        <p class="text-muted font-13"><strong>weight :</strong> <span class="m-l-15">{{ $m->wight}} kg</span></p>
+                        <p class="text-muted font-13"><strong>goal :</strong> <span class="m-l-15">{{ $m->goal }}</span></p>
+                    </div>
+
+                    <ul class="social-links list-inline m-t-30">
+                        <li>
+                            <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a>
+                        </li>
+                    </ul>
                 </div>
-            </aside>
-            <nav class="list-group">
-                <a class="list-group-item with-badge" href="#"><i class=" fa fa-th"></i>My Classes<span class="badge badge-primary badge-pill">6</span></a>
-                <a class="list-group-item" href="#"><i class="fa fa-user"></i>Profile</a>
-                <a class="list-group-item" href="#"><i class="fa fa-map"></i>Addresses</a>
-                <a class="list-group-item with-badge active" href="#"><i class="fa fa-heart"></i>Wishlist<span class="badge badge-primary badge-pill">3</span></a>
-                <a class="list-group-item with-badge" href="#"><i class="fa fa-tag"></i>My Tickets<span class="badge badge-primary badge-pill">4</span></a>
-            </nav>
-        </div>
+            </div> 
+        </div> 
         @endforeach
         @endif
 
-        <div class="col-lg-8">
-            <div class="padding-top-2x mt-2 hidden-lg-up"></div>
-            <!-- Wishlist Table-->
-            <div class="table-responsive wishlist-table margin-bottom-none">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th class="text-center"><a class="btn btn-sm btn-outline-danger" href="#">Clear Wishlist</a></th>
-                        </tr>
-                    </thead>
-                    <tbody>
 
 
-                        @if ($gymclass->isNotEmpty())
-                        @foreach ($gymclass as $class)                            
-                        <tr>
-                            <td>
-                                <div class="product-item">
-                                    <a class="product-thumb" href="#"><img src="/storage/{{ $class->class->classroom->image}}" alt="room image"></a>
-                                    <div class="product-info">
-                                        <h4 class="product-title"><a href="#">{{ $class->class->title }}</a></h4>
-                                        <h5 class="prod:uct-title"><a href="#"></a></h5>
-                                        <div class="text-lg text-medium text-muted"></div>
-                                        <div>Booked At:
-                                            <div class="d-inline text-success">{{ $class->created_at->format('Y,M,D') }}</div>
-                                        </div>
-                                        <div>Gym Room:
-                                            <div class="d-inline text-success">{{ $class->class->classroom->name}}</div>
+        <div class="col-md-8 col-lg-9">
+            <div class="">
+                <div class="">
+                    <ul class="nav nav-tabs navtab-custom">
+          
+                        <li class="">
+                            <a href="#profile" data-toggle="tab" aria-expanded="true">
+                                <span class="visible-xs"><i class="fa fa-photo"></i></span>
+                                <span class="hidden-xs">My Classes</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#settings" data-toggle="tab" aria-expanded="false">
+                                <span class="visible-xs"><i class="fa fa-cog"></i></span>
+                                <span class="hidden-xs">SETTINGS</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                     
+                        <div class="tab-pane active" id="profile">
+                            <div class="row">
+
+                                @if ()
+                                    
+                                @endif
+
+                                @if ($gymclass->isNotEmpty())
+                                @foreach ($gymclass as $class) 
+                                <div class="col-sm-4">
+                                    <h4 class="product-title"><a href="{{ route('Class_details', $class->class->id) }}"></a></h4>
+                                    <div class="gal-detail thumb">
+                                        <a href="#" class="image-popup" title="Screenshot-2">
+                                            <img src="/storage/{{ $class->class->classroom->image}}" class="thumb-img" alt="work-thumbnail">
+                                        </a>
+                                        <h4 class="text-center">{{ $class->class->title }}</h4>
+                                        <div class="ga-border"></div>
+                                        <p class="text-muted text-center"><small>{{ $class->created_at->format('Y,M,D') }}</small></p>
+
+                                        <div class="text-center">
+                                            <form action="{{ route('cancel_class',$class->id) }}" method="POST">
+                                                @csrf
+
+                                                <button type="submit" class="btn py-1 bg-danger text-center text-light" onclick="return confirm('are u sure you want to cancel this class')">cancel</button>
+
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                            </td>
-                            <td class="text-center"><a class="remove-from-cart" href="#" data-toggle="tooltip" title="" data-original-title="Remove item"><i class="icon-cross"></i></a></td>
-                        </tr>                            
-                        @endforeach 
+                                @endforeach
+                                @endif
+    
+                            </div>
+                        </div>
 
-                        @else
-                        <h4 class="text-dark">ther is no classes yeet </h4>
+
+                        @if ($member->isNotEmpty())
+                        @foreach ($member as $m) 
+                        <div class="tab-pane" id="settings">
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="FullName">Name</label>
+                                    <input type="text" value={{ $m->user->name }} Doe" id="FullName" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="Email">email</label>
+                                    <input type="email" value={{ $m->user->email}} id="Email" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="height">height</label>
+                                    <input type="number" id="height" value={{ $m->tall}}  class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="wieght">wieght</label>
+                                    <input type="number" id="wieght" value={{ $m->wight}}  class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="goal">Goal</label>
+                                    <input type="text" value="{{ $m->goal }}" id="Username" class="form-control">
+                                </div>
+                     
+                                <button class="btn btn-primary waves-effect waves-light w-md" type="submit">Save</button>
+                            </form>
+                        </div>
+                        @endforeach
                         @endif
-                    </tbody>
-                </table>
+
+
+
+                    </div>
+                </div>
             </div>
-        </div>
+        </div> <!-- end col -->
     </div>
+    <!-- end row -->
 </div>
+
+
+
+
 
 
 
@@ -124,174 +160,208 @@
 
 <style>
 
-.user-info-wrapper {
-    position: relative;
-    width: 100%;
-    margin-bottom: -1px;
-    padding-top: 90px;
-    padding-bottom: 30px;
-    border: 1px solid #e1e7ec;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-    overflow: hidden
+.card-box {
+  padding: 20px;
+  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.06), 0 2px 0 0 rgba(0, 0, 0, 0.02);
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  background-clip: padding-box;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+.header-title {
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 16px;
+  margin-bottom: 8px;
+}
+.social-links li a {
+  -webkit-border-radius: 50%;
+  background: #EFF0F4;
+  border-radius: 50%;
+  color: #7A7676;
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  width: 30px;
 }
 
-.user-info-wrapper .user-cover {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 120px;
-    background-position: center;
-    background-color: #f5f5f5;
-    background-repeat: no-repeat;
-    background-size: cover
+/* ===========
+   Gallery
+ =============*/
+.portfolioFilter a {
+  -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+  -webkit-transition: all 0.3s ease-out;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+  color: #333333;
+  padding: 5px 10px;
+  display: inline-block;
+  transition: all 0.3s ease-out;
 }
-
-.user-info-wrapper .user-cover .tooltip .tooltip-inner {
-    width: 230px;
-    max-width: 100%;
-    padding: 10px 15px
+.portfolioFilter a:hover {
+  background-color: #228bdf;
+  color: #ffffff;
 }
-
-.user-info-wrapper .info-label {
-    display: block;
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    height: 26px;
-    padding: 0 12px;
-    border-radius: 13px;
-    background-color: #fff;
-    color: #606975;
-    font-size: 12px;
-    line-height: 26px;
-    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.18);
-    cursor: pointer
+.portfolioFilter a.current {
+  background-color: #228bdf;
+  color: #ffffff;
 }
-
-.user-info-wrapper .info-label>i {
-    display: inline-block;
-    margin-right: 3px;
-    font-size: 1.2em;
-    vertical-align: middle
+.thumb {
+  background-color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  width: 100%;
 }
-
-.user-info-wrapper .user-info {
-    display: table;
-    position: relative;
-    width: 100%;
-    padding: 0 18px;
-    z-index: 5
+.thumb-img {
+  border-radius: 2px;
+  overflow: hidden;
+  width: 100%;
 }
-
-.user-info-wrapper .user-info .user-avatar,
-.user-info-wrapper .user-info .user-data {
-    display: table-cell;
-    vertical-align: top
+.gal-detail h4 {
+  margin: 16px auto 10px auto;
+  width: 80%;
+  white-space: nowrap;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
-.user-info-wrapper .user-info .user-avatar {
-    position: relative;
-    width: 115px
-}
-
-.user-info-wrapper .user-info .user-avatar>img {
-    display: block;
-    width: 100%;
-    border: 5px solid #fff;
-    border-radius: 50%
-}
-
-.user-info-wrapper .user-info .user-avatar .edit-avatar {
-    display: block;
-    position: absolute;
-    top: -2px;
-    right: 2px;
-    width: 36px;
-    height: 36px;
-    transition: opacity .3s;
-    border-radius: 50%;
-    background-color: #fff;
-    color: #606975;
-    line-height: 34px;
-    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    opacity: 0;
-    text-align: center;
-    text-decoration: none
-}
-
-.user-info-wrapper .user-info .user-avatar .edit-avatar::before {
-    font-family: feather;
-    font-size: 17px;
-    content: '\e058'
-}
-
-.user-info-wrapper .user-info .user-avatar:hover .edit-avatar {
-    opacity: 1
-}
-
-.user-info-wrapper .user-info .user-data {
-    padding-top: 48px;
-    padding-left: 12px
-}
-
-.user-info-wrapper .user-info .user-data h4 {
-    margin-bottom: 2px
-}
-
-.user-info-wrapper .user-info .user-data span {
-    display: block;
-    color: #9da9b9;
-    font-size: 13px
-}
-
-.user-info-wrapper+.list-group .list-group-item:first-child {
-    border-radius: 0
-}
-
-.user-info-wrapper+.list-group .list-group-item:first-child {
-    border-radius: 0;
-}
-.list-group-item:first-child {
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-}
-.list-group-item:first-child {
-    border-top-left-radius: .25rem;
-    border-top-right-radius: .25rem;
-}
-a.list-group-item {
-    padding-top: .87rem;
-    padding-bottom: .87rem;
-}
-a.list-group-item, .list-group-item-action {
-    transition: all .25s;
-    color: #606975;
-    font-weight: 500;
-}
-.with-badge {
-    position: relative;
-    padding-right: 3.3rem;
-}
-.list-group-item {
-    border-color: #e1e7ec;
-    background-color: #fff;
-    text-decoration: none;
-}
-.list-group-item {
-    position: relative;
-    display: block;
-    padding: .75rem 1.25rem;
-    margin-bottom: -1px;
-    background-color: #fff;
-    border: 1px solid rgba(0,0,0,0.125);
+.gal-detail .ga-border {
+  height: 3px;
+  width: 40px;
+  background-color: #228bdf;
+  margin: 10px auto;
 }
 
 
 
 
+.tabs-vertical-env .tab-content {
+  background: #ffffff;
+  display: table-cell;
+  margin-bottom: 30px;
+  padding: 30px;
+  vertical-align: top;
+}
+.tabs-vertical-env .nav.tabs-vertical {
+  display: table-cell;
+  min-width: 120px;
+  vertical-align: top;
+  width: 150px;
+}
+.tabs-vertical-env .nav.tabs-vertical li.active > a {
+  background-color: #ffffff;
+  border: 0;
+}
+.tabs-vertical-env .nav.tabs-vertical li > a {
+  color: #333333;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.nav.nav-tabs > li.active > a {
+  background-color: #ffffff;
+  border: 0;
+}
+.nav.nav-tabs > li > a {
+  background-color: transparent;
+  border-radius: 0;
+  border: none;
+  color: #333333 !important;
+  cursor: pointer;
+  line-height: 50px;
+  font-weight: 500;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+.nav.nav-tabs > li > a:hover {
+  color: #228bdf !important;
+}
+.nav.tabs-vertical > li > a {
+  background-color: transparent;
+  border-radius: 0;
+  border: none;
+  color: #333333 !important;
+  cursor: pointer;
+  line-height: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.nav.tabs-vertical > li > a:hover {
+  color: #228bdf !important;
+}
+.tab-content {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  color: #777777;
+}
+.nav.nav-tabs > li:last-of-type a {
+  margin-right: 0px;
+}
+.nav.nav-tabs {
+  border-bottom: 0;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.navtab-custom li {
+  margin-bottom: -2px;
+}
+.navtab-custom li a {
+  border-top: 2px solid transparent !important;
+}
+.navtab-custom li.active a {
+  border-top: 2px solid #228bdf !important;
+}
+.nav-tab-left.navtab-custom li a {
+  border: none !important;
+  border-left: 2px solid transparent !important;
+}
+.nav-tab-left.navtab-custom li.active a {
+  border-left: 2px solid #228bdf !important;
+}
+.nav-tab-right.navtab-custom li a {
+  border: none !important;
+  border-right: 2px solid transparent !important;
+}
+.nav-tab-right.navtab-custom li.active a {
+  border-right: 2px solid #228bdf !important;
+}
+.nav-tabs.nav-justified > .active > a,
+.nav-tabs.nav-justified > .active > a:hover,
+.nav-tabs.nav-justified > .active > a:focus,
+.tabs-vertical-env .nav.tabs-vertical li.active > a {
+  border: none;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover,
+.tabs-vertical > li.active > a,
+.tabs-vertical > li.active > a:focus,
+.tabs-vertical > li.active > a:hover {
+  color: #228bdf !important;
+}
+
+.nav.nav-tabs + .tab-content {
+    background: #ffffff;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+.progress.progress-sm .progress-bar {
+    font-size: 8px;
+    line-height: 5px;
+}
 
 </style>
 

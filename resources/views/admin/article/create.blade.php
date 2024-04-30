@@ -13,6 +13,14 @@
                         @method('POST')
                         @csrf
 
+
+
+                        <div class="form-group">
+                            <label for="content">Content:</label>
+                            <textarea name="content" id="editor" class="form-control" rows="4" required></textarea>
+                            <small class="text-muted">Enter article content</small>
+                        </div>
+
                         <div class="form-group">
                             <label for="image">Image:</label>
                             <div class="custom-file">
@@ -25,12 +33,6 @@
                             <label for="title">Title:</label>
                             <input type="text" name="title" id="title" class="form-control" required maxlength="255">
                             <small class="text-muted">Maximum 255 characters</small>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="content">Content:</label>
-                            <textarea name="content" id="editor" class="form-control" rows="4" required></textarea>
-                            <small class="text-muted">Enter article content</small>
                         </div>
 
                         <div class="form-group">

@@ -4,35 +4,17 @@
 
 @section('content')
 <div class="container py-5">
-    <div id="categoryCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            @foreach($classTypes->chunk(4) as $chunk)
-            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                <div class="row">
-                    @foreach($chunk as $classType)
-                    <div class="col-md-3">
-                        <a href="{{ route('show_class_type', $classType->id) }}">
-                            <button type="button" class="btn btn-outline-info btn-block category-btn" data-mdb-ripple-init data-mdb-ripple-color="dark">{{ $classType->name }}</button>
-                        </a>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-            @endforeach
-        </div>
-        <a class="carousel-control-prev" href="#categoryCarousel" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#categoryCarousel" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </a>
-    </div>
-
     <div class="row">
         <div class="col-md-9">
             <h2 class="text-center mb-5">Our Gym Classes</h2>
+
+
+@if ($classes->isEmpty())
+
+<h3>no class found</h3>
+@endif
+
+
             <div class="row gy-4">
                 @foreach($classes as $class)
                 <div class="col-md-12">
@@ -62,6 +44,7 @@
         </div>
     </div>
 </div>
+
 @endsection
 
 <style>
@@ -88,8 +71,11 @@
         background-color: #45a049;
     }
 
-    .category-btn {
-        margin-bottom: 10px;
+    .class-type-link:hover .bg-primary {
+        background-color: #ff6b6b !important;
+    }
+
+    .class-type-link:hover .bg-primary::after {
+        border-left-color: #ff6b6b !important;
     }
 </style>
-        

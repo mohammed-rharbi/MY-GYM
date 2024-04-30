@@ -10,26 +10,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Custom styles -->
     <style>
-        /* Adjust main content padding */
         .main-content {
             height: 100%;
-            padding-top: 56px; /* Height of the fixed navbar */
+            padding-top: 56px;
         }
 
-        #bb{
+        /* #bb{
             background-image: url('/public/images/golden-glitter-powder-dust-bursting-background-illustration.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed; 
-}
-
-        /* .custom-bg-color {
-    background-color: #4c3e06; 
 } */
 
     </style>
 </head>
-<body class="bg-dark" >
+<body class="bg-light" >
     <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark shadow custom-bg-color">
     <div class="container-fluid">
@@ -77,11 +72,21 @@
                     @endif
             
                     @if (session()->has('error'))
-                        <div class="alert alert-danger">{{ session('error') }}</div>  
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     @endif
             
                     @if (session()->has('success'))
-                        <div class="alert alert-success">{{ session('success') }}</div>  
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                   @endif
                 </div>
 
@@ -97,6 +102,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
     
 
