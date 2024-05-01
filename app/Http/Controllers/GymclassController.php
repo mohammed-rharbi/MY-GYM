@@ -52,11 +52,10 @@ class GymclassController extends Controller
 
 
         $existingClass = Gym_class::where('class_room_id', $validatedata['class_room_id'])
-            ->orWhere('date', $validatedata['date'])
-            ->orWhere('endTime', '<=', now()->format('H:i:s'))
+            ->where('date', $validatedata['date'])
+            ->where('endTime', '<=', now()->format('H:i:s'))
             ->exists();
 
-            // dd($existingClass);
     
         if ($existingClass) {
             return redirect()->back()->with('error', 'Another class is already scheduled in the same class room at the same time.');

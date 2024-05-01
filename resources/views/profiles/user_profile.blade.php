@@ -72,8 +72,10 @@
                         <div class="tab-pane active" id="profile">
                             <div class="row">
 
-                                @if ()
-                                    
+                                @if ($gymclass->isEmpty())
+                                
+                                <h2>no classes found </h2>
+
                                 @endif
 
                                 @if ($gymclass->isNotEmpty())
